@@ -18,9 +18,8 @@
         },
         "SceneMappings" : {
           "type": "array",
-           "description": "array of mappings per scene, can be 1",
-          "items": [
-            {
+          "description": "array of mappings per scene, can be 1",
+          "items": {
               "type": "object",
               "properties": {
                 "scene": {
@@ -32,15 +31,14 @@
                   "readOnly": true,
                   "description": "property name that will be mapped"
                 },
-                  "memberValue": {
+                "memberValue": {
                   "type": "string",
                   "readOnly": true,
                   "description": "value of the Member Property"
                 }
               },
               "required": [ "scene", "memberProperty", "memberValue" ]
-            }
-          ]
+          }
         },
 
         "link": {
