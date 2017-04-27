@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.easysetup-schema.json#",
+  "definitions": {
+    "oic.r.easysetup": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "oic.collection-schema.json#/definitions/oic.collection"
+        },
+        {
+          "properties": {
+            "rt": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true,
+              "items": {
+                  "enum": ["oic.r.easysetup","oic.wk.col"]
+              }
+            },
+            "rts": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                  "enum": ["oic.r.wificonf","oic.r.devconf","oic.r.coapcloudconf"]
+              }
+            },
+            "ps": {
+              "type": "integer",
+              "description": "Indicates the easy setup status of the device. (0: Need to Setup,1: Connecting to Enroller,2: Connected to Enroller,3: Failed to Connect to Enroller,4: Registering to Cloud, 5: Registered to Cloud, 6: Failed to Register to Cloud,7: Publishing resources to Cloud,8: Published resources to Cloud,9: Failed to publish resources to Cloud, 10~254: Reserved, 255: EOF)",
+              "readOnly": "true",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "lec": {
+              "type": "integer",
+              "description": "Indicates a failure reason (0: NO error,1: A given SSID is not found,2: WiFi's password is wrong,3: IP address is not allocated,4: NO internet connection,5: Timeout,6: Failed to access cloud server,7: No response from cloud server, 8: Invalid Authcode,9: Invalid AccessToken, 10: Failed to refresh AccessToken,11: Failed to find a registered device in Cloud,12: Failed to find a registered user in Cloud, 13~254: Reserved, 255: Unknown error)",
+              "readOnly": "true",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "cn": {
+              "type": "array",
+              "description": "Indicates an array of connection types that trigger an attempt to connect to the Enroller to start.",
+              "items": {
+                "type": "integer",
+                "description": "Connection type to attempt. (1 : WiFi, 2 : CoAP Cloud Server, 3 : other transport to be added in a future (e.g. BLE))"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "required": ["ps", "lec", "cn"]
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.r.easysetup" }
+  ]
+}

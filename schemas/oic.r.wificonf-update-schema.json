@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.wificonf-update-schema.json#",
+  "definitions": {
+    "oic.r.wificonf": {
+      "type": "object",
+      "properties": {
+        "tnn": {
+          "type": "string",
+          "description": "Indicates Target Network Name (SSID of WiFi AP)"
+        },
+        "cd": {
+          "type": "string",
+          "description": "Indicates credential information of WiFi AP"
+        },
+        "wat": {
+          "enum": ["None", "WEP", "WPA-PSK", "WPA2-PSK"],
+          "description": "Indicates WiFi Auth Type"
+        },
+        "wet": {
+          "enum": ["None", "WEP-64", "WEP-128", "TKIP", "AES", "TKIP_AES"],
+          "description": "Indicates WiFi Encryption Type"
+        }
+      },
+      "required":["tnn"]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.r.wificonf" }
+  ]
+}

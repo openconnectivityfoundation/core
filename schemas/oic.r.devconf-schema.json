@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.devconf-schema.json#",
+  "definitions": {
+    "oic.r.devconf": {
+      "type": "object",
+      "properties": {
+        "dn": {
+          "type": "string",
+          "description": "Device name to be detected from mediator during easy-setup process",
+          "readOnly": true
+        }
+      },
+      "required":["dn"]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.r.devconf" }
+  ]
+}

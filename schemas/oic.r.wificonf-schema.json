@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.wificonf-schema.json#",
+  "definitions": {
+    "oic.r.wificonf": {
+      "type": "object",
+      "properties": {
+        "swmt": {
+          "type": "array",
+          "description": "Indicates supported Wi-Fi mode types. It can be multiple",
+          "readOnly": true,
+          "items": [
+            {
+              "type": "integer",
+              "description": "Supported WiFi Mode Type. i.e. 0: A, 1: B, 2: G, 3: N, 4: AC"
+            }
+          ]
+        },
+        "swf": {
+          "enum": ["2.4G", "5G", "Both"],
+          "description": "Indicates supported Wi-Fi frequency",
+          "readOnly": true
+        },
+        "tnn": {
+          "type": "string",
+          "description": "Indicates Target Network Name (SSID of WiFi AP)"
+        },
+        "cd": {
+          "type": "string",
+          "description": "Indicates credential information of WiFi AP"
+        },
+        "wat": {
+          "enum": ["None", "WEP", "WPA-PSK", "WPA2-PSK"],
+          "description": "Indicates WiFi Auth Type"
+        },
+        "wet": {
+          "enum": ["None", "WEP-64", "WEP-128", "TKIP", "AES", "TKIP_AES"],
+          "description": "Indicates WiFi Encryption Type"
+        }
+      },
+      "required":["swmt", "swf", "tnn"]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.r.wificonf" }
+  ]
+}

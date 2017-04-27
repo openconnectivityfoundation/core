@@ -1,0 +1,74 @@
+#%RAML 0.8
+title: Device Configuration Resource
+version: v0.0.1-20161125
+documentation:
+  - title: OCF Copyright
+    content: Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+schemas:
+  - DevConf: !include schemas/oic.r.devconf-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+/example/DevConfResURI:
+  description: |
+    Device configuration resource stores a preference of device settings like
+    device name. Vender-specfic information can be added to the resource.
+
+  displayName: Device Configuration
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieve various settings regarding to device-specific settings
+      1. Device name (human-friendly)
+
+    queryParameters:
+      if:
+        default: oic.if.baseline
+        required: true
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: DevConf
+            example: |
+                {
+                  "rt": ["oic.r.devconf"],
+                  "dn" : "My Refrigerator"
+                }
+  post:
+    description: |
+      Deliver device-specific settings to an unboxing device. As of know,
+      language and country information can be delivered
+
+    queryParameters:
+      if:
+        default: oic.if.baseline
+        required: true
+
+    body:
+      application/json:
+        schema: DevConf
+        example: |
+          {
+            "dn" : "My Refrigerator"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: DevConf
+            example: |
+              {
+                "dn" : "My Refrigerator"
+              }

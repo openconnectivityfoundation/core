@@ -1,0 +1,280 @@
+#%RAML 0.8
+title: Easy Setup Resource
+version: v0.0.1-20161125
+documentation:
+  - title: OCF Copyright
+    content: Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+schemas:
+  - EasySetup: !include schemas/oic.r.easysetup-schema.json
+  - EasySetup-batch-update: !include schemas/oic.r.easysetup-batch-update-schema.json
+  - slinks: !include schemas/oic.collection.linkslist-schema.json
+  - sbatch: !include schemas/oic.collection.batch-retrieve-schema.json
+
+traits:
+  - getinterface:
+      queryParameters:
+        if:
+          displayName: Collection Interface
+          type: string
+          enum: [ "oic.if.baseline","oic.if.ll","oic.if.b" ]
+          description: |
+            Defines the interface to use for the GET request
+            oic.if.baseline - baseline interface - get the properties and links in the collection
+            oic.if.ll - links list interface - apply request to list of links i.e. get the links defined in the collection
+            oic.if.b - batch interface - apply request individually *against* each of the links in the collection i.e. get the representation of each target resource in the link and aggregate into a single response
+          default: "oic.if.baseline"
+
+  - postinterface:
+      queryParameters:
+        if:
+          displayName: Collection Interface
+          type: string
+          enum: [ "oic.if.baseline","oic.if.b" ]
+          description: |
+            Defines the interface to use for the POST request
+            oic.if.baseline - baseline interface - update properties in a collection
+            oic.if.b - batch interface - update properties in both of collection its child resources if a property in POST reset matches to one of properties in each resource
+          default: "oic.if.baseline"
+
+/example/EasySetupResURI:
+  description: |
+    Easy Setup resource stores an useful information including a current
+    status of unboxing device and last error code which are produced in a process
+    of easy setup.
+    Note that, Easy Setup resource is a type of collection resource, which has
+    WiFiConf, CoAPCloudConf, and DevConf resources as its child resources.
+
+  displayName: Easey Setup Collection
+  get:
+    description: |
+      Retrieve useful information during easy setup process
+        1. A current status in easy setup process
+        2. A last error code describing a reason of some failures occured at the
+            last time.
+    is: [ getinterface ]
+    responses:
+      200:
+        body:
+          application/json:
+            schema: EasySetup
+            example: |
+              {
+                "ps" : 0,
+                "lec": 0,
+                "cn": [2],
+                "links": [
+                  {
+                    "href": "/WiFiConfResURI",
+                    "rt":   ["oic.r.wificonf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  },
+                  {
+                    "href": "/DevConfResURI",
+                    "rt":   ["oic.r.devconf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  },
+                  {
+                    "href": "/CoAPCloudConfResURI",
+                    "rt":   ["oic.r.coapcloudconf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  }
+                ]
+              }
+          application/json+ll:
+            schema: slinks
+            example: |
+              {
+                "links": [
+                  {
+                    "href": "/WiFiConfResURI",
+                    "rt":   ["oic.r.wificonf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  },
+                  {
+                    "href": "/DevConfResURI",
+                    "rt":   ["oic.r.devconf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  },
+                  {
+                    "href": "/CoAPCloudConfResURI",
+                    "rt":   ["oic.r.coapcloudconf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  }
+                ]
+              }
+          application/json+b:
+            schema: sbatch
+            example: |
+              [
+                {
+                  "href": "/EasySetupResURI",
+                  "rep":{
+                    "ps" : 0,
+                    "lec": 0,
+                    "cn": [2]
+                  }
+                },
+                {
+                  "href": "/WiFiConfResURI",
+                  "rep":{
+                    "swmt" : [0, 1, 2],
+                    "swf": "Both",
+                    "tnn": "Home_AP_SSID",
+                    "cd": "Home_AP_PWD",
+                    "wat": "WPA2-PSK",
+                    "wet": "AES"
+                  }
+                },
+                {
+                  "href": "/DevConfResURI",
+                  "rep":{
+                    "dn" : "My Refrigerator"
+                  }
+                },
+                {
+                  "href": "/CoAPCloudConfResURI",
+                  "rep":{
+                    "ac":"Auth code",
+                    "apn":"Authenticate server",
+                    "cis":"https://CloudInterfaceServerURL"
+                  }
+                }
+              ]
+
+  post:
+    description: |
+      Able to deliver WiFi configuration, CoAP Cloud configuration, and device
+      configuration information in a batch by utilizing 'batch' interface.
+      If you want to deliver WiFi and device configuration information in a batch,
+      you can write all properties you want to send with a 'batch' interface
+      The below example is the case to send WiFi and device configuration (i.e.
+      language and country) in a batch
+    is: [ postinterface ]
+
+    body:
+      application/json:
+        schema: EasySetup
+        example: |
+          {
+            "ps" : 0,
+            "lec": 0,
+            "cn": [2]
+          }
+
+      application/json+b:
+        schema: EasySetup-batch-update
+        example: |
+          {
+            "tnn": "Home_AP_SSID",
+            "cd": "Home_AP_PWD",
+            "wat": "WPA2-PSK",
+            "wet": "AES"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: EasySetup
+            example: |
+              {
+                "ps" : 0,
+                "lec": 0,
+                "cn": [2],
+                "links": [
+                  {
+                    "href": "/WiFiConfResURI",
+                    "rt":   ["oic.r.wificonf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  },
+                  {
+                    "href": "/DevConfResURI",
+                    "rt":   ["oic.r.devconf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  },
+                  {
+                    "href": "/CoAPCloudConfResURI",
+                    "rt":   ["oic.r.coapcloudconf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  }
+                ]
+              }
+
+          application/json+b:
+            schema: sbatch
+            example: |
+              [
+                {
+                  "href": "/EasySetupResURI",
+                  "rep" : {
+                    "ps" : 0,
+                    "lec": 0,
+                    "cn": [2]
+                  }
+                },
+                {
+                  "href": "/WiFiConfResURI",
+                  "rep" : {
+                    "swmt" : [0, 1, 2],
+                    "swf": "Both",
+                    "tnn": "Home_AP_SSID",
+                    "cd": "Home_AP_PWD",
+                    "wat": "WPA2-PSK"
+                  }
+                },
+                {
+                  "href": "/DevConfResURI",
+                  "rep" : {
+                    "dn" : "My Refrigerator"
+                  }
+                },
+                {
+                  "href": "/CoAPCloudConfResURI",
+                  "rep" : {
+                    "ac":"Auth code",
+                    "apn":"Authenticate server",
+                    "cis":"https://CloudInterfaceServerURL",
+                    "sid":"Server ID"
+                  }
+                }
+              ]

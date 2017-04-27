@@ -1,0 +1,89 @@
+#%RAML 0.8
+title: WiFi Configuration Resource
+version: v0.0.1-20161125
+documentation:
+  - title: OCF Copyright
+    content: Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+schemas:
+  - WiFiConf: !include schemas/oic.r.wificonf-schema.json
+  - WiFiConfUpdate: !include schemas/oic.r.wificonf-update-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+/example/WiFiConfResURI:
+  description: |
+    WiFi resource stores an essential information to help an unboxing device to
+    connect to an existing WiFi AP. The information includes :
+    1. WiFi SSID and password
+    2. WiFi Security type (i.e. auth type and encription type)
+    3. WiFi hardware capability (i.e. supported frequency and mode)
+
+  displayName: WiFi Configuration
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieve properties of WiFi resource.
+
+    queryParameters:
+      if:
+        default: oic.if.baseline
+        required: true
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: WiFiConf
+            example: |
+              {
+                "rt": ["oic.r.wificonf"],
+                "swmt" : [0, 1, 2],
+                "swf": "Both",
+                "tnn": "Home_AP_SSID",
+                "cd": "Home_AP_PWD",
+                "wat": "WPA2-PSK",
+                "wet": "TKIP"
+              }
+
+  post:
+    description: |
+      Deliver WiFi AP's information for an unboxing device to connect to the AP.
+      Note that, supported frequency and mode CANNOT be written by the POST request
+
+    queryParameters:
+      if:
+        default: oic.if.baseline
+        required: true
+
+    body:
+      application/json:
+        schema: WiFiConfUpdate
+        example: |
+          {
+            "tnn": "Home_AP_SSID",
+            "cd": "Home_AP_PWD",
+            "wat": "WPA2-PSK",
+            "wet": "AES"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: WiFiConfUpdate
+            example: |
+              {
+                "tnn": "Home_AP_SSID",
+                "cd": "Home_AP_PWD",
+                "wat": "WPA2-PSK",
+                "wet": "AES"
+              }
