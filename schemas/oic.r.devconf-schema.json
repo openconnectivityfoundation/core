@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.devconf-schema.json#",
   "definitions": {
@@ -8,7 +8,7 @@
       "properties": {
         "dn": {
           "type": "string",
-          "description": "Device name to be detected from mediator during easy-setup process",
+          "description": "Indicates the device name presented by enrollee device to mediator device during easy-setup process",
           "readOnly": true
         }
       },

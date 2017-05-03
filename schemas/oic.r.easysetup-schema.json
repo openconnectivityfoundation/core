@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-v4/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.easysetup-schema.json#",
   "definitions": {
@@ -30,14 +30,14 @@
             },
             "ps": {
               "type": "integer",
-              "description": "Indicates the easy setup status of the device. (0: Need to Setup,1: Connecting to Enroller,2: Connected to Enroller,3: Failed to Connect to Enroller,4: Registering to Cloud, 5: Registered to Cloud, 6: Failed to Register to Cloud,7: Publishing resources to Cloud,8: Published resources to Cloud,9: Failed to publish resources to Cloud, 10~254: Reserved, 255: EOF)",
+              "description": "Indicates the easy setup status of the device. (0: Need to Setup, 1: Connecting to Enroller, 2: Connected to Enroller, 3: Failed to Connect to Enroller, 4: Registering to Cloud, 5: Registered to Cloud, 6: Failed to Register to Cloud, 7: Publishing resources to Cloud, 8: Published resources to Cloud, 9: Failed to publish resources to Cloud, 10~254: Reserved, 255: EOF)",
               "readOnly": "true",
               "minimum": 0,
               "maximum": 255
             },
             "lec": {
               "type": "integer",
-              "description": "Indicates a failure reason (0: NO error,1: A given SSID is not found,2: WiFi's password is wrong,3: IP address is not allocated,4: NO internet connection,5: Timeout,6: Failed to access cloud server,7: No response from cloud server, 8: Invalid Authcode,9: Invalid AccessToken, 10: Failed to refresh AccessToken,11: Failed to find a registered device in Cloud,12: Failed to find a registered user in Cloud, 13~254: Reserved, 255: Unknown error)",
+              "description": "Indicates a failure reason (0: NO error, 1: A given SSID is not found, 2: WiFi's password is wrong, 3: IP address is not allocated, 4: No internet connection, 5: Time-out, 6: Failed to access cloud server, 7: No response from cloud server, 8: Invalid Auth Code, 9: Invalid AccessToken, 10: Failed to refresh AccessToken, 11: Failed to find a registered device in Cloud, 12: Failed to find a registered user in Cloud, 13~254: Reserved, 255: Unknown error)",
               "readOnly": "true",
               "minimum": 0,
               "maximum": 255
@@ -47,7 +47,7 @@
               "description": "Indicates an array of connection types that trigger an attempt to connect to the Enroller to start.",
               "items": {
                 "type": "integer",
-                "description": "Connection type to attempt. (1 : WiFi, 2 : CoAP Cloud Server, 3 : other transport to be added in a future (e.g. BLE))"
+                "description": "Connection type to attempt. (1 : WiFi, 2 : CoAP Cloud Server, 3: other transport to be added in a future (e.g. BLE))"
               }
             }
           }
