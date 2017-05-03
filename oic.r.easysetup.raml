@@ -11,9 +11,10 @@ documentation:
 
 schemas:
   - EasySetup: !include schemas/oic.r.easysetup-schema.json
-  - EasySetup-batch-update: !include schemas/oic.collection.batch-update-schema.json
   - slinks: !include schemas/oic.collection.linkslist-schema.json
   - sbatch: !include schemas/oic.collection.batch-retrieve-schema.json
+  - sbatch-update: !include schemas/oic.collection.batch-update-schema.json
+
 
 traits:
   - getinterface:
@@ -24,9 +25,13 @@ traits:
           enum: [ "oic.if.baseline","oic.if.ll","oic.if.b" ]
           description: |
             Defines the interface to use for the GET request
-            oic.if.baseline - baseline interface - get the properties and links in the collection
-            oic.if.ll - links list interface - apply request to list of links i.e. get the links defined in the collection
-            oic.if.b - batch interface - apply request individually *against* each of the links in the collection i.e. get the representation of each target resource in the link and aggregate into a single response
+            oic.if.baseline - baseline interface - get the properties and links
+            in the collection.
+            oic.if.ll - links list interface - apply request to list of links
+            i.e. get the links defined in the collection.
+            oic.if.b - batch interface - apply request individually *against*
+            each of the links in the collection i.e. get the representation of
+            each target resource in the link and aggregate into a single response.
           default: "oic.if.baseline"
 
   - postinterface:
@@ -37,25 +42,27 @@ traits:
           enum: [ "oic.if.baseline","oic.if.b" ]
           description: |
             Defines the interface to use for the POST request
-            oic.if.baseline - baseline interface - update properties in a collection
-            oic.if.b - batch interface - update properties in both of collection its child resources if a property in POST reset matches to one of properties in each resource
+            oic.if.baseline - baseline interface - update properties in a collection.
+            oic.if.b - batch interface - update properties in both of
+            collection and its child resources if a property in POST reset
+            matches to one of properties in each resource.
           default: "oic.if.baseline"
 
 /example/EasySetupResURI:
   description: |
-    Easy Setup resource stores an useful information including a current
-    status of unboxing device and last error code which are produced in a process
-    of easy setup.
+    Easy Setup resource stores an useful information including a current status
+    of unboxing device and last error code which are produced in a process of
+    easy setup.
     Note that, Easy Setup resource is a type of collection resource, which has
     WiFiConf, CoAPCloudConf, and DevConf resources as its child resources.
 
   displayName: Easy Setup Collection
   get:
     description: |
-      Retrieve useful information during easy setup process
-        1. A current status in easy setup process
-        2. A last error code describing a reason of some failures occured at the
-            last time.
+      Retrieve useful information during easy setup process :
+        1. A current status in easy setup process.
+        2. A last error code describing a reason of some failures occurred at
+           the last time.
     is: [ getinterface ]
     responses:
       200:
@@ -172,12 +179,12 @@ traits:
 
   post:
     description: |
-      Able to deliver WiFi configuration, CoAP Cloud configuration, and device
+      Able to deliver WiFi configuration, CoAP Cloud configuration, and Device
       configuration information in a batch by utilizing 'batch' interface.
-      If you want to deliver WiFi and device configuration information in a batch,
-      you can write all properties you want to send with a 'batch' interface
-      The below example is the case to send WiFi and device configuration (i.e.
-      language and country) in a batch
+      If you want to deliver WiFi and Device configuration information in a batch,
+      you can write all properties you want to send with a 'batch' interface.
+      The below example is the case to send Easy Setup and WiFi configuration
+      (i.e. connection type, target network, auth type information) in a batch.
     is: [ postinterface ]
 
     body:
@@ -185,20 +192,29 @@ traits:
         schema: EasySetup
         example: |
           {
-            "ps" : 0,
-            "lec": 0,
             "cn": [2]
           }
 
       application/json+b:
-        schema: EasySetup-batch-update
+        schema: sbatch-update
         example: |
-          {
-            "tnn": "Home_AP_SSID",
-            "cd": "Home_AP_PWD",
-            "wat": "WPA2-PSK",
-            "wet": "AES"
-          }
+          [
+            {
+              "href": "/EasySetupResURI",
+              "rep":{
+                "cn": [2]
+              }
+            },
+            {
+              "href": "/WiFiConfResURI",
+              "rep":{
+                "tnn": "Home_AP_SSID",
+                "cd": "Home_AP_PWD",
+                "wat": "WPA2-PSK",
+                "wet": "AES"
+              }
+            }
+          ]
     responses:
       200:
         body:
