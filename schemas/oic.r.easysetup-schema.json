@@ -22,22 +22,23 @@
             },
             "rts": {
               "type": "array",
-              "minItems": 3,
-              "maxItems": 3,
-              "items": {
-                  "enum": ["oic.r.wificonf","oic.r.devconf","oic.r.coapcloudconf"]
-              }
+              "minItems": 1,
+              "items": [
+                {
+                  "enum": ["oic.r.wificonf", "oic.r.devconf"]
+                }
+              ]
             },
             "ps": {
               "type": "integer",
-              "description": "Indicates the easy setup status of the device. (0: Need to Setup, 1: Connecting to Enroller, 2: Connected to Enroller, 3: Failed to Connect to Enroller, 4: Registering to Cloud, 5: Registered to Cloud, 6: Failed to Register to Cloud, 7: Publishing resources to Cloud, 8: Published resources to Cloud, 9: Failed to publish resources to Cloud, 10~254: Reserved, 255: EOF)",
+              "description": "Indicates the easy setup status of the device. (0: Need to Setup, 1: Connecting to Enroller, 2: Connected to Enroller, 3: Failed to Connect to Enroller, 4~254: Reserved, 255: EOF)",
               "readOnly": "true",
               "minimum": 0,
               "maximum": 255
             },
             "lec": {
               "type": "integer",
-              "description": "Indicates a failure reason (0: NO error, 1: A given SSID is not found, 2: WiFi's password is wrong, 3: IP address is not allocated, 4: No internet connection, 5: Time-out, 6: Failed to access cloud server, 7: No response from cloud server, 8: Invalid Auth Code, 9: Invalid AccessToken, 10: Failed to refresh AccessToken, 11: Failed to find a registered device in Cloud, 12: Failed to find a registered user in Cloud, 13~254: Reserved, 255: Unknown error)",
+              "description": "Indicates a failure reason (0: NO error, 1: A given SSID is not found, 2: WiFi's password is wrong, 3: IP address is not allocated, 4: No internet connection, 5~254: Reserved, 255: Unknown error)",
               "readOnly": "true",
               "minimum": 0,
               "maximum": 255
@@ -47,7 +48,7 @@
               "description": "Indicates an array of connection types that trigger an attempt to connect to the Enroller to start.",
               "items": {
                 "type": "integer",
-                "description": "Connection type to attempt. (1 : WiFi, 2 : CoAP Cloud Server, 3: other transport to be added in a future (e.g. BLE))"
+                "description": "Connection type to attempt. (1 : WiFi, 2 : other entities / transports to be added in future (e.g. Connect to cloud / BLE))"
               }
             }
           }

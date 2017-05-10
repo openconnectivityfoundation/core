@@ -29,7 +29,8 @@ traits:
   get:
     description: |
       Retrieve various settings regarding to device-specific settings
-      1. Device name (human-friendly)
+      1. Device name (human-friendly name to be detected by mediator during
+         easy setup)
 
     queryParameters:
       if:
@@ -46,29 +47,3 @@ traits:
                   "rt": ["oic.r.devconf"],
                   "dn" : "My Refrigerator"
                 }
-  post:
-    description: |
-      Deliver device-specific settings to an unboxing device. As of know,
-      language and country information can be delivered
-
-    queryParameters:
-      if:
-        default: oic.if.baseline
-        required: true
-
-    body:
-      application/json:
-        schema: DevConf
-        example: |
-          {
-            "dn" : "My Refrigerator"
-          }
-    responses:
-      200:
-        body:
-          application/json:
-            schema: DevConf
-            example: |
-              {
-                "dn" : "My Refrigerator"
-              }

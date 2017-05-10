@@ -53,16 +53,17 @@ traits:
     Easy Setup resource stores an useful information including a current status
     of unboxing device and last error code which are produced in a process of
     easy setup.
-    Note that, Easy Setup resource is a type of collection resource, which has
-    WiFiConf, CoAPCloudConf, and DevConf resources as its child resources.
+    Note that, Easy Setup resource is a type of collection resource, which
+    contains links to WiFiConf, DevConf resources and may additionally contain
+    links to other resources.
 
   displayName: Easy Setup Collection
   get:
     description: |
       Retrieve useful information during easy setup process :
         1. A current status in easy setup process.
-        2. A last error code describing a reason of some failures occurred at
-           the last time.
+        2. A last error code describing reason for failure occurred at the last
+           time.
     is: [ getinterface ]
     responses:
       200:
@@ -73,7 +74,7 @@ traits:
               {
                 "ps" : 0,
                 "lec": 0,
-                "cn": [2],
+                "cn": [1],
                 "links": [
                   {
                     "href": "/WiFiConfResURI",
@@ -87,15 +88,6 @@ traits:
                   {
                     "href": "/DevConfResURI",
                     "rt":   ["oic.r.devconf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
-                  },
-                  {
-                    "href": "/CoAPCloudConfResURI",
-                    "rt":   ["oic.r.coapcloudconf"],
                     "if":   ["oic.if.baseline"],
                     "p":{"bm":3},
                     "eps": [
@@ -126,15 +118,6 @@ traits:
                     "eps": [
                       {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
                     ]
-                  },
-                  {
-                    "href": "/CoAPCloudConfResURI",
-                    "rt":   ["oic.r.coapcloudconf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
                   }
                 ]
               }
@@ -147,7 +130,7 @@ traits:
                   "rep":{
                     "ps" : 0,
                     "lec": 0,
-                    "cn": [2]
+                    "cn": [1]
                   }
                 },
                 {
@@ -166,21 +149,13 @@ traits:
                   "rep":{
                     "dn" : "My Refrigerator"
                   }
-                },
-                {
-                  "href": "/CoAPCloudConfResURI",
-                  "rep":{
-                    "ac":"Auth code",
-                    "apn":"Authenticate server",
-                    "cis":"https://CloudInterfaceServerURL"
-                  }
                 }
               ]
 
   post:
     description: |
-      Able to deliver WiFi configuration, CoAP Cloud configuration, and Device
-      configuration information in a batch by utilizing 'batch' interface.
+      Able to deliver WiFi, Device configuration and other configuration
+      information in a batch by utilizing 'batch' interface.
       If you want to deliver WiFi and Device configuration information in a batch,
       you can write all properties you want to send with a 'batch' interface.
       The below example is the case to send Easy Setup and WiFi configuration
@@ -192,7 +167,7 @@ traits:
         schema: EasySetup
         example: |
           {
-            "cn": [2]
+            "cn": [1]
           }
 
       application/json+b:
@@ -202,7 +177,7 @@ traits:
             {
               "href": "/EasySetupResURI",
               "rep":{
-                "cn": [2]
+                "cn": [1]
               }
             },
             {
@@ -224,7 +199,7 @@ traits:
               {
                 "ps" : 0,
                 "lec": 0,
-                "cn": [2],
+                "cn": [1],
                 "links": [
                   {
                     "href": "/WiFiConfResURI",
@@ -243,15 +218,6 @@ traits:
                     "eps": [
                       {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
                     ]
-                  },
-                  {
-                    "href": "/CoAPCloudConfResURI",
-                    "rt":   ["oic.r.coapcloudconf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
                   }
                 ]
               }
@@ -265,7 +231,7 @@ traits:
                   "rep" : {
                     "ps" : 0,
                     "lec": 0,
-                    "cn": [2]
+                    "cn": [1]
                   }
                 },
                 {
@@ -282,15 +248,6 @@ traits:
                   "href": "/DevConfResURI",
                   "rep" : {
                     "dn" : "My Refrigerator"
-                  }
-                },
-                {
-                  "href": "/CoAPCloudConfResURI",
-                  "rep" : {
-                    "ac":"Auth code",
-                    "apn":"Authenticate server",
-                    "cis":"https://CloudInterfaceServerURL",
-                    "sid":"Server ID"
                   }
                 }
               ]
