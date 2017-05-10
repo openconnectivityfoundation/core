@@ -8,7 +8,8 @@
       "properties": {
         "dn": {
           "type": "string",
-          "description": "Indicates the device name presented by enrollee device to mediator device during easy-setup process",
+          "description": "Indicates a pre-configured device name presented by
+          enrollee device to mediator device during easy-setup process",
           "readOnly": true
         }
       },
