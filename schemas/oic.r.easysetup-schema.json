@@ -38,7 +38,7 @@
             },
             "lec": {
               "type": "integer",
-              "description": "Indicates a failure reason (0: NO error, 1: A given SSID is not found, 2: WiFi's password is wrong, 3: IP address is not allocated, 4: No internet connection, 5~254: Reserved, 255: Unknown error)",
+              "description": "Indicates a failure reason (0: NO error, 1: A given SSID is not found, 2: Wi-Fi's password is wrong, 3: IP address is not allocated, 4: No internet connection, 5~254: Reserved, 255: Unknown error)",
               "readOnly": "true",
               "minimum": 0,
               "maximum": 255
@@ -48,7 +48,7 @@
               "description": "Indicates an array of connection types that trigger an attempt to connect to the Enroller to start.",
               "items": {
                 "type": "integer",
-                "description": "Connection type to attempt. (1 : WiFi, 2 : other entities / transports to be added in future (e.g. Connect to cloud / BLE))"
+                "description": "Connection type to attempt. (1 : Wi-Fi, 2 : other entities / transports to be added in future (e.g. Connect to cloud / BLE))"
               }
             }
           }
