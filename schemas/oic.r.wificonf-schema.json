@@ -13,7 +13,7 @@
           "items": [
             {
               "type": "integer",
-              "description": "Supported WiFi Mode Type. i.e. 0: A, 1: B, 2: G, 3: N, 4: AC"
+              "description": "Supported Wi-Fi Mode Type. i.e. 0: A, 1: B, 2: G, 3: N, 4: AC"
             }
           ]
         },
@@ -24,19 +24,19 @@
         },
         "tnn": {
           "type": "string",
-          "description": "Indicates Target Network Name (SSID of WiFi AP)"
+          "description": "Indicates Target Network Name (SSID of Wi-Fi AP)"
         },
         "cd": {
           "type": "string",
-          "description": "Indicates credential information of WiFi AP"
+          "description": "Indicates credential information of Wi-Fi AP"
         },
         "wat": {
           "enum": ["None", "WEP", "WPA-PSK", "WPA2-PSK"],
-          "description": "Indicates WiFi Auth Type"
+          "description": "Indicates Wi-Fi Auth Type"
         },
         "wet": {
           "enum": ["None", "WEP-64", "WEP-128", "TKIP", "AES", "TKIP_AES"],
-          "description": "Indicates WiFi Encryption Type"
+          "description": "Indicates Wi-Fi Encryption Type"
         }
       },
       "required":["swmt", "swf", "tnn"]

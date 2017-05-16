@@ -50,8 +50,8 @@ traits:
 
 /example/EasySetupResURI:
   description: |
-    Easy Setup resource stores an useful information including a current status
-    of unboxing device and last error code which are produced in a process of
+    Easy Setup resource stores useful information including current status of
+    unboxing device and last error code which are produced in a process of
     easy setup.
     Note that, Easy Setup resource is a type of collection resource, which
     contains links to WiFiConf, DevConf resources and may additionally contain
@@ -154,11 +154,11 @@ traits:
 
   post:
     description: |
-      Able to deliver WiFi, Device configuration and other configuration
+      Able to deliver Wi-Fi, Device configuration and other configuration
       information in a batch by utilizing 'batch' interface.
-      If you want to deliver WiFi and Device configuration information in a batch,
+      If you want to deliver Wi-Fi and Device configuration information in a batch,
       you can write all properties you want to send with a 'batch' interface.
-      The below example is the case to send Easy Setup and WiFi configuration
+      The below example is the case to send Easy Setup and Wi-Fi configuration
       (i.e. connection type, target network, auth type information) in a batch.
     is: [ postinterface ]
 
@@ -241,7 +241,8 @@ traits:
                     "swf": "Both",
                     "tnn": "Home_AP_SSID",
                     "cd": "Home_AP_PWD",
-                    "wat": "WPA2-PSK"
+                    "wat": "WPA2-PSK",
+                    "wet": "AES"
                   }
                 },
                 {

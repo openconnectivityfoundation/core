@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: WiFi Configuration Resource
+title: Wi-Fi Configuration Resource
 version: v0.0.1-20161125
 documentation:
   - title: OCF Copyright
@@ -21,18 +21,18 @@ traits:
 
 /example/WiFiConfResURI:
   description: |
-    WiFi resource stores an essential information to help an unboxing device to
-    connect to an existing WiFi AP. The information includes :
-    1. WiFi SSID and password
-    2. WiFi Security type (i.e. auth type and encription type)
-    3. WiFi hardware capability (i.e. supported frequency and mode)
+    WiFiConf resource stores essential information to help an unboxing device
+    to connect to an existing Wi-Fi AP. The information includes :
+    1. Wi-Fi SSID and password
+    2. Wi-Fi Security type (i.e. auth type and encription type)
+    3. Wi-Fi hardware capability (i.e. supported frequency and mode)
 
-  displayName: WiFi Configuration
+  displayName: Wi-Fi Configuration
   is: [ interface ] # valid for all methods
 
   get:
     description: |
-      Retrieve properties of WiFi resource.
+      Retrieve properties of WiFiConf resource.
 
     queryParameters:
       if:
@@ -57,8 +57,9 @@ traits:
 
   post:
     description: |
-      Deliver WiFi AP's information for an unboxing device to connect to the AP.
-      Note that, supported frequency and mode CANNOT be written by the POST request
+      Deliver Wi-Fi AP's information for an unboxing device to connect to it.
+      Note that, supported frequency and mode CANNOT be written by the POST
+      request.
 
     queryParameters:
       if:
