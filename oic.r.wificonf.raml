@@ -47,12 +47,14 @@ traits:
             example: |
               {
                 "rt": ["oic.r.wificonf"],
-                "swmt" : [0, 1, 2],
-                "swf": "Both",
+                "swmt" : ["A", "B", "G"],
+                "swf": ["2.4G", "5G"],
                 "tnn": "Home_AP_SSID",
                 "cd": "Home_AP_PWD",
                 "wat": "WPA2-PSK",
-                "wet": "TKIP"
+                "wet": "TKIP",
+                "swat": ["WPA-PSK", "WPA2-PSK"],
+                "swet": ["TKIP", "AES", "TKIP_AES"]
               }
 
   post:

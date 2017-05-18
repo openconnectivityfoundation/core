@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.easysetup-schema.json#",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.easysetup-schema.json#",
   "definitions": {
     "oic.r.easysetup": {
       "type": "object",
@@ -51,11 +51,11 @@
                 "description": "Connection type to attempt. (1 : Wi-Fi, 2 : other entities / transports to be added in future (e.g. Connect to cloud / BLE))"
               }
             }
-          }
+          },
+          "required": ["ps", "lec", "cn"]
         }
       ]
-    },
-    "required": ["ps", "lec", "cn"]
+    }
   },
   "type": "object",
   "allOf": [

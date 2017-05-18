@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.wificonf-schema.json#",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.wificonf-schema.json#",
   "definitions": {
     "oic.r.wificonf": {
       "type": "object",
@@ -12,15 +12,22 @@
           "readOnly": true,
           "items": [
             {
-              "type": "integer",
-              "description": "Supported Wi-Fi Mode Type. i.e. 0: A, 1: B, 2: G, 3: N, 4: AC"
+              "type": "string",
+              "enum": ["A","B","G","N","AC"],
+              "description": "Supported Wi-Fi Mode Type."
             }
           ]
         },
         "swf": {
-          "enum": ["2.4G", "5G", "Both"],
+          "type": "array",
           "description": "Indicates supported Wi-Fi frequency",
-          "readOnly": true
+          "readOnly": true,
+          "items": [
+            {
+              "type": "string",
+              "enum": ["2.4G", "5G"]
+            }
+          ]
         },
         "tnn": {
           "type": "string",
@@ -31,12 +38,38 @@
           "description": "Indicates credential information of Wi-Fi AP"
         },
         "wat": {
+          "type": "string",
           "enum": ["None", "WEP", "WPA-PSK", "WPA2-PSK"],
           "description": "Indicates Wi-Fi Auth Type"
         },
         "wet": {
+          "type": "string",
           "enum": ["None", "WEP-64", "WEP-128", "TKIP", "AES", "TKIP_AES"],
           "description": "Indicates Wi-Fi Encryption Type"
+        },
+        "swat": {
+          "type": "array",
+          "description": "Indicates supported Wi-Fi Auth types. It can be multiple",
+          "readOnly": true,
+          "items": [
+            {
+              "type": "string",
+              "enum": ["None", "WEP", "WPA-PSK", "WPA2-PSK"],
+              "description": "Indicates Wi-Fi Auth Type"
+            }
+          ]
+        },
+        "swet": {
+          "type": "array",
+          "description": "Indicates supported Wi-Fi Encryption types. It can be multiple",
+          "readOnly": true,
+          "items": [
+            {
+              "type": "string",
+              "enum": ["None", "WEP-64", "WEP-128", "TKIP", "AES", "TKIP_AES"],
+              "description": "Indicates Wi-Fi Encryption Type"
+            }
+          ]
         }
       },
       "required":["swmt", "swf", "tnn"]
