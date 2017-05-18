@@ -1,0 +1,79 @@
+#%RAML 0.8
+title: CoAP Cloud Configuration Resource
+version: v0.0.1-20161125
+documentation:
+  - title: OCF Copyright
+    content: Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+schemas:
+  - CoAPCloudConf: !include schemas/oic.r.coapcloudconf-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+/example/CoAPCloudConfResURI:
+  description: |
+    Cloud server resource stores all information for an unboxing device to
+    register to cloud server. We assume that OAuth 2.0 protocol is used for
+    authenticating a user account by the cloud server.
+  displayName: CoAP Cloud Configuration
+  is: [ interface ] # valid for all methods
+
+  get:
+    description: |
+      Retrieve all essential information used for cloud registration
+      1. Auth code
+      2. Authentication provider ID
+      3. Cloud interface server URL
+    queryParameters:
+      if:
+        default: oic.if.baseline
+        required: true
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CoAPCloudConf
+            example: |
+              {
+                "rt": ["oic.r.coapcloudconf"],
+                "ac":"Auth code",
+                "apn":"Authenticate server",
+                "cis":"https://CloudServerURI"
+              }
+  post:
+    description: |
+      Update properties of DevConf resource.
+    queryParameters:
+      if:
+        default: oic.if.baseline
+        required: true
+
+    body:
+      application/json:
+        schema: CoAPCloudConf
+        example: |
+          {
+            "ac":"Auth code",
+            "apn":"Authenticate server",
+            "cis":"https://CloudServerURI"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CoAPCloudConf
+            example: |
+              {
+                "ac":"Auth code",
+                "apn":"Authenticate server",
+                "cis":"https://CloudServerURI"
+              }
