@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: CoAP Cloud Configuration Resource
-version: v0.0.1-20161125
+version: v0.0.2-20170518
 documentation:
   - title: OCF Copyright
     content: Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
@@ -20,9 +20,8 @@ traits:
 
 /example/CoAPCloudConfResURI:
   description: |
-    Cloud server resource stores all information for an unboxing device to
-    register to cloud server. We assume that OAuth 2.0 protocol is used for
-    authenticating a user account by the cloud server.
+    CoAPCloudConf resource exposes configuration information for connecting to a
+    cloud server.
   displayName: CoAP Cloud Configuration
   is: [ interface ] # valid for all methods
 
@@ -51,7 +50,7 @@ traits:
               }
   post:
     description: |
-      Update properties of DevConf resource.
+      Update properties of CoAPCloudConf resource.
     queryParameters:
       if:
         default: oic.if.baseline
