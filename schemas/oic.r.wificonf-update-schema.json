@@ -8,11 +8,13 @@
       "properties": {
         "tnn": {
           "type": "string",
-          "description": "Indicates Target Network Name (SSID of Wi-Fi AP)"
+          "description": "Indicates Target Network Name (SSID of Wi-Fi AP)",
+          "pattern": "^.*$"
         },
         "cd": {
           "type": "string",
-          "description": "Indicates credential information of Wi-Fi AP"
+          "description": "Indicates credential information of Wi-Fi AP",
+          "pattern": "^.*$"
         },
         "wat": {
           "enum": ["None", "WEP", "WPA-PSK", "WPA2-PSK"],
