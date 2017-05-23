@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.coapcloudconf-update-schema.json#",
+  "definitions": {
+    "oic.r.coapcloudconf": {
+      "type": "object",
+      "properties": {
+        "ac": {
+          "type": "string",
+          "description": "Indicates auth code provided by authentication server",
+          "pattern": "^.*$"
+        },
+        "apn": {
+          "type": "string",
+          "description": "Authentication provider's name issuing the auth code",
+          "pattern": "^.*$"
+        },
+        "cis": {
+          "type": "string",
+          "description": "Indicates URL for CoAP native cloud interface server to be registered",
+          "format": "uri"
+        },
+        "at": {
+          "type": "string",
+          "description": "Indicates access token which is given in return of auth code issued by an appropriate account server",
+          "pattern": "^.*$"
+        },
+        "att": {
+          "enum": ["Unknown", "BEARER", "MAC"],
+          "description": "Indicates access token type"
+        }
+      },
+      "required":["cis"]
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.r.coapcloudconf" }
+  ]
+}

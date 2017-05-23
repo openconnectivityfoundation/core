@@ -11,6 +11,7 @@ documentation:
 
 schemas:
   - CoAPCloudConf: !include schemas/oic.r.coapcloudconf-schema.json
+  - CoAPCloudConfUpdate: !include schemas/oic.r.coapcloudconf-update-schema.json
 
 traits:
   - interface:
@@ -58,7 +59,7 @@ traits:
 
     body:
       application/json:
-        schema: CoAPCloudConf
+        schema: CoAPCloudConfUpdate
         example: |
           {
             "ac":"Auth code",
@@ -69,7 +70,7 @@ traits:
       200:
         body:
           application/json:
-            schema: CoAPCloudConf
+            schema: CoAPCloudConfUpdate
             example: |
               {
                 "ac":"Auth code",
