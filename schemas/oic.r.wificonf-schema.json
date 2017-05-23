@@ -25,7 +25,7 @@
           "items": [
             {
               "type": "string",
-              "enum": ["2.4G", "5G"]
+              "enum": ["2_4G", "5G"]
             }
           ]
         },
@@ -41,12 +41,12 @@
         },
         "wat": {
           "type": "string",
-          "enum": ["None", "WEP", "WPA-PSK", "WPA2-PSK"],
+          "enum": ["None", "WEP", "WPA_PSK", "WPA2_PSK"],
           "description": "Indicates Wi-Fi Auth Type"
         },
         "wet": {
           "type": "string",
-          "enum": ["None", "WEP-64", "WEP-128", "TKIP", "AES", "TKIP_AES"],
+          "enum": ["None", "WEP_64", "WEP_128", "TKIP", "AES", "TKIP_AES"],
           "description": "Indicates Wi-Fi Encryption Type"
         },
         "swat": {
@@ -56,7 +56,7 @@
           "items": [
             {
               "type": "string",
-              "enum": ["None", "WEP", "WPA-PSK", "WPA2-PSK"],
+              "enum": ["None", "WEP", "WPA_PSK", "WPA2_PSK"],
               "description": "Indicates Wi-Fi Auth Type"
             }
           ]
@@ -68,7 +68,7 @@
           "items": [
             {
               "type": "string",
-              "enum": ["None", "WEP-64", "WEP-128", "TKIP", "AES", "TKIP_AES"],
+              "enum": ["None", "WEP_64", "WEP_128", "TKIP", "AES", "TKIP_AES"],
               "description": "Indicates Wi-Fi Encryption Type"
             }
           ]
