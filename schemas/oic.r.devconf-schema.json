@@ -11,6 +11,7 @@
             "dn": {
               "type": "string",
               "description": "Indicates a pre-configured device name in language indicated by 'dl' in /oic/con;  presented by enrollee device to mediator device during easy-setup process",
+              "pattern": "^.*$",
               "readOnly": true
             }
           },
@@ -30,8 +31,9 @@
                   },
                   "value": {
                     "type": "string",
-                    "readOnly": true,
-                    "description": "Pre-configured device name in the indicated language."
+                    "description": "Pre-configured device name in the indicated language.",
+                    "pattern": "^.*$",
+                    "readOnly": true
                   }
                 }
               },

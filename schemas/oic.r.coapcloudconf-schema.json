@@ -8,11 +8,13 @@
       "properties": {
         "ac": {
           "type": "string",
-          "description": "Indicates auth code provided by authentication server"
+          "description": "Indicates auth code provided by authentication server",
+          "pattern": "^.*$"
         },
         "apn": {
           "type": "string",
-          "description": "Authentication provider's name issuing the auth code"
+          "description": "Authentication provider's name issuing the auth code",
+          "pattern": "^.*$"
         },
         "cis": {
           "type": "string",
@@ -21,11 +23,12 @@
         },
         "at": {
           "type": "string",
-          "description": "Indicates access token which is given in return of auth code issued by an appropriate account server"
+          "description": "Indicates access token which is given in return of auth code issued by an appropriate account server",
+          "pattern": "^.*$"
         },
         "att": {
-          "enum": ["BEARER", "MAC"],
-          "description": "Indicates access token type, i.e. 'bearer' (0: Unknown, 1: BEARER, 2: MAC)"
+          "enum": ["Unknown", "BEARER", "MAC"],
+          "description": "Indicates access token type"
         },
         "cps": {
           "type": "integer",
