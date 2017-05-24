@@ -11,12 +11,13 @@ documentation:
 
 schemas:
   - CoAPCloudConf: !include schemas/oic.r.coapcloudconf-schema.json
+  - CoAPCloudConfUpdate: !include schemas/oic.r.coapcloudconf-update-schema.json
 
 traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.baseline"]
+          enum: ["oic.if.rw", "oic.if.baseline"]
 
 /example/CoAPCloudConfResURI:
   description: |
@@ -58,7 +59,7 @@ traits:
 
     body:
       application/json:
-        schema: CoAPCloudConf
+        schema: CoAPCloudConfUpdate
         example: |
           {
             "ac":"Auth code",

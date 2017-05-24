@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.coapcloudconf-schema.json#",
+  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.coapcloudconf-update-schema.json#",
   "definitions": {
     "oic.r.coapcloudconf": {
       "type": "object",
@@ -29,20 +29,6 @@
         "att": {
           "enum": ["Unknown", "Bearer", "MAC"],
           "description": "Indicates access token type"
-        },
-        "cps": {
-          "type": "integer",
-          "description": "Indicates the cloud registration status of the device. (0: Need to Configure, 1: Registering to CoAP Cloud, 2: Registered to CoAP Cloud, 3: Failed to Register to CoAP Cloud, 4: Publishing resources to CoAP Cloud, 5: Published resources to CoAP Cloud, 6: Failed to publish resources to CoAP Cloud, 7~254: Reserved, 255: EOF)",
-          "readOnly": "true",
-          "minimum": 0,
-          "maximum": 255
-        },
-        "clec": {
-          "type": "integer",
-          "description": "Indicates a failure reason (0: No Error. 1: Failed to access CoAP Cloud server,  2: No response from CoAP Cloud server,  3: Invalid Auth Code, 4: Invalid Access Token, 5: Failed to refresh Access Token, 6: Failed to find a registered device in CoAP Cloud, 7: Failed to find a registered user in CoAP Cloud, 8~254: Reserved, 255: Unknown error)",
-          "readOnly": "true",
-          "minimum": 0,
-          "maximum": 255
         }
       },
       "required":["cis"]
