@@ -34,11 +34,6 @@ traits:
     description: |
       Retrieve properties of WiFiConf resource.
 
-    queryParameters:
-      if:
-        default: oic.if.baseline
-        required: true
-
     responses:
       200:
         body:
@@ -62,11 +57,6 @@ traits:
       Deliver Wi-Fi AP's information for an unboxing device to connect to it.
       Note that, supported frequency and mode CANNOT be written by the POST
       request.
-
-    queryParameters:
-      if:
-        default: oic.if.baseline
-        required: true
 
     body:
       application/json:
