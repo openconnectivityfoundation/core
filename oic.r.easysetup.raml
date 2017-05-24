@@ -11,6 +11,7 @@ documentation:
 
 schemas:
   - EasySetup: !include schemas/oic.r.easysetup-schema.json
+  - EasySetup-update: !include schemas/oic.r.easysetup-update-schema.json
   - slinks: !include schemas/oic.collection.linkslist-schema.json
   - sbatch: !include schemas/oic.collection.batch-retrieve-schema.json
   - sbatch-update: !include schemas/oic.collection.batch-update-schema.json
@@ -164,7 +165,7 @@ traits:
 
     body:
       application/json:
-        schema: EasySetup
+        schema: EasySetup-update
         example: |
           {
             "cn": [1]
