@@ -17,7 +17,7 @@ traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.baseline"]
+          enum: ["oic.if.rw", "oic.if.baseline"]
 
 /example/CoAPCloudConfResURI:
   description: |
@@ -70,7 +70,7 @@ traits:
       200:
         body:
           application/json:
-            schema: CoAPCloudConfUpdate
+            schema: CoAPCloudConf
             example: |
               {
                 "ac":"Auth code",

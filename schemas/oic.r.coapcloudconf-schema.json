@@ -27,7 +27,7 @@
           "pattern": "^.*$"
         },
         "att": {
-          "enum": ["Unknown", "BEARER", "MAC"],
+          "enum": ["Unknown", "Bearer", "MAC"],
           "description": "Indicates access token type"
         },
         "cps": {
