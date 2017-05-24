@@ -17,38 +17,27 @@ schemas:
 
 
 traits:
-  - getinterface:
+  - interface-all:
       queryParameters:
         if:
-          displayName: Collection Interface
-          type: string
           enum: [ "oic.if.baseline","oic.if.ll","oic.if.b" ]
-          description: |
-            Defines the interface to use for the GET request
-            oic.if.baseline - baseline interface - get the properties and links
-            in the collection.
-            oic.if.ll - links list interface - apply request to list of links
-            i.e. get the links defined in the collection.
-            oic.if.b - batch interface - apply request individually *against*
-            each of the links in the collection i.e. get the representation of
-            each target resource in the link and aggregate into a single response.
-          default: "oic.if.baseline"
 
-  - postinterface:
+  - interface-baseline:
       queryParameters:
         if:
-          displayName: Collection Interface
-          type: string
-          enum: [ "oic.if.baseline","oic.if.b" ]
-          description: |
-            Defines the interface to use for the POST request
-            oic.if.baseline - baseline interface - update properties in a collection.
-            oic.if.b - batch interface - update properties in both of
-            collection and its child resources if a property in POST reset
-            matches to one of properties in each resource.
-          default: "oic.if.baseline"
+          enum: [ "oic.if.baseline" ]
 
-/example/EasySetupResURI:
+  - interface-batch:
+      queryParameters:
+        if:
+          enum: [ "oic.if.b" ]
+
+  - interface-ll:
+      queryParameters:
+        if:
+          enum: [ "oic.if.ll" ]
+
+/example/EasySetupBaselineInterfaceResURI:
   description: |
     Easy Setup resource stores useful information including current status of
     unboxing device and last error code which are produced in a process of
@@ -57,14 +46,15 @@ traits:
     contains links to WiFiConf, DevConf resources and may additionally contain
     links to other resources.
 
-  displayName: Easy Setup Collection
+  displayName: Easy Setup Collection Baseline Interface
+  is: [ interface-baseline ]
+
   get:
     description: |
       Retrieve useful information during easy setup process :
         1. A current status in easy setup process.
         2. A last error code describing reason for failure occurred at the last
            time.
-    is: [ getinterface ]
     responses:
       200:
         body:
@@ -96,32 +86,29 @@ traits:
                   }
                 ]
               }
-          application/json+ll:
-            schema: slinks
-            example: |
-              {
-                "links": [
-                  {
-                    "href": "/WiFiConfResURI",
-                    "rt":   ["oic.r.wificonf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
-                  },
-                  {
-                    "href": "/DevConfResURI",
-                    "rt":   ["oic.r.devconf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
-                  }
-                ]
-              }
-          application/json+b:
+
+/example/EasySetupBatchInterfaceResURI:
+  description: |
+    Easy Setup resource stores useful information including current status of
+    unboxing device and last error code which are produced in a process of
+    easy setup.
+    Note that, Easy Setup resource is a type of collection resource, which
+    contains links to WiFiConf, DevConf resources and may additionally contain
+    links to other resources.
+
+  displayName: Easy Setup Collection Batch Interface
+  is: [ interface-batch ]
+
+  get:
+    description: |
+      Retrieve useful information during easy setup process :
+      1. A current status in easy setup process.
+      2. A last error code describing reason for failure occurred at the last
+         time.
+    responses:
+      200:
+        body:
+          application/json:
             schema: sbatch
             example: |
               [
@@ -160,17 +147,8 @@ traits:
       you can write all properties you want to send with a 'batch' interface.
       The below example is the case to send Easy Setup and Wi-Fi configuration
       (i.e. connection type, target network, auth type information) in a batch.
-    is: [ postinterface ]
-
     body:
       application/json:
-        schema: EasySetup
-        example: |
-          {
-            "cn": [1]
-          }
-
-      application/json+b:
         schema: sbatch-update
         example: |
           [
@@ -194,35 +172,6 @@ traits:
       200:
         body:
           application/json:
-            schema: EasySetup
-            example: |
-              {
-                "ps" : 0,
-                "lec": 0,
-                "cn": [1],
-                "links": [
-                  {
-                    "href": "/WiFiConfResURI",
-                    "rt":   ["oic.r.wificonf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
-                  },
-                  {
-                    "href": "/DevConfResURI",
-                    "rt":   ["oic.r.devconf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
-                  }
-                ]
-              }
-
-          application/json+b:
             schema: sbatch
             example: |
               [
@@ -252,3 +201,50 @@ traits:
                   }
                 }
               ]
+
+/example/EasySetupLLInterfaceResURI:
+  description: |
+    Easy Setup resource stores useful information including current status of
+    unboxing device and last error code which are produced in a process of
+    easy setup.
+    Note that, Easy Setup resource is a type of collection resource, which
+    contains links to WiFiConf, DevConf resources and may additionally contain
+    links to other resources.
+
+  displayName: Easy Setup Collection Link List Interface
+  is: [ interface-ll ]
+
+  get:
+    description: |
+      Retrieve useful information during easy setup process :
+      1. A current status in easy setup process.
+      2. A last error code describing reason for failure occurred at the last
+         time.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: slinks
+            example: |
+              {
+                "links": [
+                  {
+                    "href": "/WiFiConfResURI",
+                    "rt":   ["oic.r.wificonf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  },
+                  {
+                    "href": "/DevConfResURI",
+                    "rt":   ["oic.r.devconf"],
+                    "if":   ["oic.if.baseline"],
+                    "p":{"bm":3},
+                    "eps": [
+                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                    ]
+                  }
+                ]
+              }
