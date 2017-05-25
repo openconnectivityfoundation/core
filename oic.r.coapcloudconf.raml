@@ -32,10 +32,6 @@ traits:
       1. Auth code
       2. Authentication provider ID
       3. Cloud interface server URL
-    queryParameters:
-      if:
-        default: oic.if.baseline
-        required: true
 
     responses:
       200:
@@ -52,10 +48,6 @@ traits:
   post:
     description: |
       Update properties of CoAPCloudConf resource.
-    queryParameters:
-      if:
-        default: oic.if.baseline
-        required: true
 
     body:
       application/json:
