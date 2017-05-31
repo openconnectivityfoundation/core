@@ -14,30 +14,94 @@ schemas:
   - CoAPCloudConfUpdate: !include schemas/oic.r.coapcloudconf-update-schema.json
 
 traits:
-  - interface:
+  - interface-baseline:
       queryParameters:
         if:
-          enum: ["oic.if.rw", "oic.if.baseline"]
+          enum: ["oic.if.baseline"]
 
-/example/CoAPCloudConfResURI:
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw"]
+
+
+/example/CoAPCloudConfBaselineInterfaceResURI:
   description: |
     CoAPCloudConf resource exposes configuration information for connecting to a
     cloud server.
   displayName: CoAP Cloud Configuration
-  is: [ interface ] # valid for all methods
+  is: [ interface-baseline ] # valid for baseline method.
 
   get:
     description: |
       Retrieve all essential information used for cloud registration
       1. Auth code
-      2. Authentication provider ID
+      2. Authentication provider name
       3. Cloud interface server URL
+      4. Present Status & Error Code (optional)
 
     responses:
       200:
         body:
           application/json:
             schema: CoAPCloudConf
+            example: |
+              {
+                "rt": ["oic.r.coapcloudconf"],
+                "ac":"Auth code",
+                "apn":"Authenticate server",
+                "cis":"https://CloudServerURI",
+                "cps": 0,
+                "clec": 0
+              }
+
+  post:
+    description: |
+      Update properties of CoAPCloudConf resource.
+
+    body:
+      application/json:
+        schema: CoAPCloudConfUpdate
+        example: |
+          {
+            "ac":"Auth code",
+            "apn":"Authenticate server",
+            "cis":"https://CloudServerURI"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CoAPCloudConf
+            example: |
+              {
+                "ac":"Auth code",
+                "apn":"Authenticate server",
+                "cis":"https://CloudServerURI",
+                "cps": 0,
+                "clec": 0
+              }
+
+/example/CoAPCloudConfRWInterfaceResURI:
+  description: |
+    CoAPCloudConf resource exposes configuration information for connecting to a
+    cloud server.
+  displayName: CoAP Cloud Configuration
+  is: [ interface-rw ] # valid for RW method.
+
+  get:
+    description: |
+      Retrieve all essential information used for cloud registration that can
+      be updated by a client.
+      1. Auth code
+      2. Authentication provider name
+      3. Cloud interface server URL
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CoAPCloudConfUpdate
             example: |
               {
                 "rt": ["oic.r.coapcloudconf"],
@@ -67,5 +131,7 @@ traits:
               {
                 "ac":"Auth code",
                 "apn":"Authenticate server",
-                "cis":"https://CloudServerURI"
+                "cis":"https://CloudServerURI",
+                "cps": 0,
+                "clec": 0
               }
