@@ -31,17 +31,15 @@
             },
             "ps": {
               "type": "integer",
+              "enum": [0, 1, 2, 3],
               "description": "Indicates the easy setup status of the device. (0: Need to Setup, 1: Connecting to Enroller, 2: Connected to Enroller, 3: Failed to Connect to Enroller, 4~254: Reserved, 255: EOF)",
-              "readOnly": "true",
-              "minimum": 0,
-              "maximum": 255
+              "readOnly": "true"
             },
             "lec": {
               "type": "integer",
+              "enum": [0, 1, 2, 3, 4, 255],
               "description": "Indicates a failure reason (0: NO error, 1: A given SSID is not found, 2: Wi-Fi's password is wrong, 3: IP address is not allocated, 4: No internet connection, 5~254: Reserved, 255: Unknown error)",
-              "readOnly": "true",
-              "minimum": 0,
-              "maximum": 255
+              "readOnly": "true"
             },
             "cn": {
               "type": "array",
