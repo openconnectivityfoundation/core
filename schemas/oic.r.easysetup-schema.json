@@ -37,8 +37,8 @@
             },
             "lec": {
               "type": "integer",
-              "enum": [0, 1, 2, 3, 4, 255],
-              "description": "Indicates a failure reason (0: NO error, 1: A given SSID is not found, 2: Wi-Fi's password is wrong, 3: IP address is not allocated, 4: No internet connection, 5~254: Reserved, 255: Unknown error)",
+              "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 255],
+              "description": "Indicates a failure reason (0: NO error, 1: A given SSID is not found, 2: Wi-Fi's password is wrong, 3: IP address is not allocated, 4: No internet connection, 5: Timeout, 6: Wi-Fi Auth Type is not supported by the Enrollee, 7: Wi-Fi Encryption Type is not supported by the Enrollee, 8: Wi-Fi Auth Type is wrong (while trying to connect to the Mediator), 9: Wi-Fi Encryption Type is wrong (while trying to connect to the Mediator), 10~254: Reserved, 255: Unknown error)",
               "readOnly": "true"
             },
             "cn": {
