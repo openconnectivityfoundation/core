@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: Wi-Fi Configuration Resource
-version: v0.0.1-20161125
+version: v0.0.2-20170604
 documentation:
   - title: OCF Copyright
     content: Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
@@ -14,26 +14,32 @@ schemas:
   - WiFiConfUpdate: !include schemas/oic.r.wificonf-update-schema.json
 
 traits:
-  - interface:
+  - interface-baseline:
       queryParameters:
         if:
           enum: ["oic.if.baseline"]
 
-/example/WiFiConfResURI:
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw"]
+
+/example/WiFiConfBaselineInterfaceResURI:
   description: |
     WiFiConf resource stores essential information to help an unboxing device
-    to connect to an existing Wi-Fi AP. The information includes :
-    1. Wi-Fi SSID and password
-    2. Wi-Fi Security type (i.e. auth type and encription type)
-    3. Wi-Fi hardware capability (i.e. supported frequency and mode)
+    to connect to an existing Wi-Fi AP.
 
   displayName: Wi-Fi Configuration
-  is: [ interface ] # valid for all methods
+  is: [ interface-baseline ]
 
   get:
     description: |
       Retrieve properties of WiFiConf resource.
-
+      The information includes :
+      1. Wi-Fi SSID and password
+      2. Wi-Fi Security type (i.e. auth type and encription type)
+      3. Wi-Fi hardware capability (i.e. supported frequencies, modes,
+        auth types and encryption types)
     responses:
       200:
         body:
@@ -55,8 +61,58 @@ traits:
   post:
     description: |
       Deliver Wi-Fi AP's information for an unboxing device to connect to it.
-      Note that, supported frequency and mode CANNOT be written by the POST
-      request.
+
+    body:
+      application/json:
+        schema: WiFiConfUpdate
+        example: |
+          {
+            "tnn": "Home_AP_SSID",
+            "cd": "Home_AP_PWD",
+            "wat": "WPA2_PSK",
+            "wet": "AES"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: WiFiConfUpdate
+            example: |
+              {
+                "tnn": "Home_AP_SSID",
+                "cd": "Home_AP_PWD",
+                "wat": "WPA2_PSK",
+                "wet": "AES"
+              }
+
+/example/WiFiConfRWInterfaceResURI:
+  description: |
+    WiFiConf resource stores essential information to help an unboxing device
+    to connect to an existing Wi-Fi AP.
+
+  displayName: Wi-Fi Configuration
+  is: [ interface-rw ]
+
+  get:
+    description: |
+      Retrieve properties of WiFiConf resource that can be updated by a client.
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: WiFiConfUpdate
+            example: |
+              {
+                "tnn": "Home_AP_SSID",
+                "cd": "Home_AP_PWD",
+                "wat": "WPA2_PSK",
+                "wet": "AES"
+              }
+
+  post:
+    description: |
+      Deliver Wi-Fi AP's information for an unboxing device to connect to it.
 
     body:
       application/json:

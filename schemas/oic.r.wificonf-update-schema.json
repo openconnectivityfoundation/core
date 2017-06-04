@@ -25,7 +25,7 @@
           "description": "Indicates Wi-Fi Encryption Type"
         }
       },
-      "required":["tnn"]
+      "required":["tnn", "wat", "wet"]
     }
   },
   "type": "object",
