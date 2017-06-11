@@ -10,24 +10,22 @@
           "type": "array",
           "description": "Indicates supported Wi-Fi mode types. It can be multiple",
           "readOnly": true,
-          "items": [
+          "items":
             {
               "type": "string",
               "enum": ["A","B","G","N","AC"],
               "description": "Supported Wi-Fi Mode Type."
             }
-          ]
         },
         "swf": {
           "type": "array",
-          "description": "Indicates supported Wi-Fi frequency",
+          "description": "Indicates Supported Wi-Fi frequencies by the Enrollee. Can be multiple. Valid values are ('2.4G', '5G')",
           "readOnly": true,
-          "items": [
+          "items":
             {
               "type": "string",
-              "enum": ["2_4G", "5G"]
+              "pattern": "^(2\\.4|5)G$"
             }
-          ]
         },
         "tnn": {
           "type": "string",
@@ -53,25 +51,23 @@
           "type": "array",
           "description": "Indicates supported Wi-Fi Auth types. It can be multiple",
           "readOnly": true,
-          "items": [
+          "items":
             {
               "type": "string",
               "enum": ["None", "WEP", "WPA_PSK", "WPA2_PSK"],
               "description": "Indicates Wi-Fi Auth Type"
             }
-          ]
         },
         "swet": {
           "type": "array",
           "description": "Indicates supported Wi-Fi Encryption types. It can be multiple",
           "readOnly": true,
-          "items": [
+          "items":
             {
               "type": "string",
               "enum": ["None", "WEP_64", "WEP_128", "TKIP", "AES", "TKIP_AES"],
               "description": "Indicates Wi-Fi Encryption Type"
             }
-          ]
         }
       },
       "required":["swmt", "swf", "swat", "swet", "tnn", "wat", "wet"]
