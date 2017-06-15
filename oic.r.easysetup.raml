@@ -226,25 +226,23 @@ traits:
           application/json:
             schema: slinks
             example: |
-              {
-                "links": [
-                  {
-                    "href": "/WiFiConfResURI",
-                    "rt":   ["oic.r.wificonf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
-                  },
-                  {
-                    "href": "/DevConfResURI",
-                    "rt":   ["oic.r.devconf"],
-                    "if":   ["oic.if.baseline"],
-                    "p":{"bm":3},
-                    "eps": [
-                      {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
-                    ]
-                  }
-                ]
-              }
+              [
+                {
+                  "href": "/WiFiConfResURI",
+                  "rt":   ["oic.r.wificonf"],
+                  "if":   ["oic.if.baseline"],
+                  "p":{"bm":3},
+                  "eps": [
+                    {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                  ]
+                },
+                {
+                  "href": "/DevConfResURI",
+                  "rt":   ["oic.r.devconf"],
+                  "if":   ["oic.if.baseline"],
+                  "p":{"bm":3},
+                  "eps": [
+                    {"ep": "coaps://[fe80::b1d6]:1111", "pri": 2}
+                  ]
+                }
+              ]
