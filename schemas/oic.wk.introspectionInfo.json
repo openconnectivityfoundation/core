@@ -1,6 +1,6 @@
 {
-  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.introspectionInfo.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.introspectionInfo.json#",
   "description" : "Copyright (c) 2017 Open Interconnect Consortium, Inc. All rights reserved.",
   "title": "introspection resource",
   "definitions": {

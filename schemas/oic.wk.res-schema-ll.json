@@ -1,8 +1,8 @@
 {
-  "$schema": "http://json-schema.org/draft-v4/schema#",
-  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.res-schema-ll.json#",
-  "description": "The list of resources expressed as OCF links without di",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "OCF links without di",
   "definitions": {
     "oic.res-ll": {
       "$ref": "oic.oic-link-schema.json#/definitions/oic.oic-link"
