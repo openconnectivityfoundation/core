@@ -18,7 +18,7 @@ traits:
       queryParameters:
         if:
           enum: ["oic.if.baseline","oic.if.rw"]
-          
+
   - interface-baseline:
       queryParameters:
         if:
@@ -40,10 +40,9 @@ traits:
   get:
     description: |
       Retrieve all essential information used for cloud registration
-      1. Auth code
+      1. Access Token
       2. Authentication provider name
       3. Cloud interface server URL
-      4. Present Status & Error Code (optional)
 
     responses:
       200:
@@ -53,11 +52,9 @@ traits:
             example: |
               {
                 "rt": ["oic.r.coapcloudconf"],
-                "ac":"Auth code",
+                "at":"Access Token",
                 "apn":"Authenticate server",
-                "cis":"https://CloudServerURI",
-                "cps": 0,
-                "clec": 0
+                "cis":"https://CloudServerURI"
               }
 
   post:
@@ -69,7 +66,7 @@ traits:
         schema: CoAPCloudConfUpdate
         example: |
           {
-            "ac":"Auth code",
+            "at":"Access Token",
             "apn":"Authenticate server",
             "cis":"https://CloudServerURI"
           }
@@ -80,11 +77,9 @@ traits:
             schema: CoAPCloudConf
             example: |
               {
-                "ac":"Auth code",
+                "at":"Access Token",
                 "apn":"Authenticate server",
-                "cis":"https://CloudServerURI",
-                "cps": 0,
-                "clec": 0
+                "cis":"https://CloudServerURI"
               }
 
 /example/CoAPCloudConfRWInterfaceResURI:
@@ -98,7 +93,7 @@ traits:
     description: |
       Retrieve all essential information used for cloud registration that can
       be updated by a client.
-      1. Auth code
+      1. Access Token
       2. Authentication provider name
       3. Cloud interface server URL
 
@@ -110,7 +105,7 @@ traits:
             example: |
               {
                 "rt": ["oic.r.coapcloudconf"],
-                "ac":"Auth code",
+                "at":"Access Token",
                 "apn":"Authenticate server",
                 "cis":"https://CloudServerURI"
               }
@@ -123,7 +118,7 @@ traits:
         schema: CoAPCloudConfUpdate
         example: |
           {
-            "ac":"Auth code",
+            "at":"Access Token",
             "apn":"Authenticate server",
             "cis":"https://CloudServerURI"
           }
@@ -134,9 +129,7 @@ traits:
             schema: CoAPCloudConf
             example: |
               {
-                "ac":"Auth code",
+                "at":"Access Token",
                 "apn":"Authenticate server",
-                "cis":"https://CloudServerURI",
-                "cps": 0,
-                "clec": 0
+                "cis":"https://CloudServerURI"
               }
