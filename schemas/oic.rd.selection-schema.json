@@ -1,25 +1,31 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.rd.selection-schema.json#",
-  "title" : "RD Selection",
-  "definitions": {
-    "oic.rd.attributes": {
-      "type": "object",
-      "properties": {
-        "sel": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 100,
-          "description": "A bias factor calculated by the Resource directory"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.rd.selection-schema.json#",
+    "description": "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+    "title": "RD Selection",
+    "definitions": {
+        "oic.rd.attributes": {
+            "type": "object",
+            "properties": {
+                "sel": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "A bias factor calculated by the Resource directory"
+                }
+            },
+            "required": [
+                "sel"
+            ]
         }
-      },
-      "required": ["sel"]
-    }
-  },
-  "type": "object",
-  "allOf": [
-    { "$ref": "oic.core-schema.json#/definitions/oic.core" },
-    { "$ref": "#/definitions/oic.rd.attributes" }
-  ]
+    },
+    "type": "object",
+    "allOf": [
+        {
+            "$ref": "oic.core-schema.json#/definitions/oic.core"
+        },
+        {
+            "$ref": "#/definitions/oic.rd.attributes"
+        }
+    ]
 }

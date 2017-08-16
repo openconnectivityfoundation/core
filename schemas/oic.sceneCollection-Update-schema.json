@@ -1,30 +1,36 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneCollection-Update-schema.json#",
-  "title" : "Scene Collection",
-  "definitions": {
-    "oic.sceneCollection-Update": {
-      "type": "object",
-      "allOf": [
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.sceneCollection-Update-schema.json#",
+    "description": "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+    "title": "Scene Collection",
+    "definitions": {
+        "oic.sceneCollection-Update": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "oic.collection-schema.json#/definitions/oic.collection"
+                },
+                {
+                    "properties": {
+                        "lastScene": {
+                            "type": "string",
+                            "description": "Last selected Scene from the set of sceneValues"
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "lastScene"
+            ]
+        }
+    },
+    "type": "object",
+    "allOf": [
         {
-          "$ref": "oic.collection-schema.json#/definitions/oic.collection"
+            "$ref": "oic.core-schema.json#/definitions/oic.core"
         },
         {
-          "properties": {
-            "lastScene": {
-              "type": "string",
-              "description": "Last selected Scene from the set of sceneValues"
-            }
-          }
+            "$ref": "#/definitions/oic.sceneCollection-Update"
         }
-      ],
-      "required": [ "lastScene" ]
-    }
-  },
-  "type": "object",
-  "allOf" : [
-    { "$ref": "oic.core-schema.json#/definitions/oic.core" },
-    { "$ref": "#/definitions/oic.sceneCollection-Update" }
-  ]
+    ]
 }
