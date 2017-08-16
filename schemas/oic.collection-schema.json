@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
+    "description": "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
     "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.collection-schema.json#",
     "title": "Collection",
     "definitions": {
@@ -24,14 +24,14 @@
             "description": "A collection is a set of links along with additional properties to describe the collection itself",
             "properties": {
                 "rts": {
-                  "allOf": [
-                    {
-                      "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt"
-                    },
-                    {
-                      "description": "The list of allowable resource types (for Target and anchors) in links included in the collection"
-                    }
-                  ]
+                    "allOf": [
+                        {
+                            "$ref": "oic.core-schema.json#/definitions/oic.core/properties/rt"
+                        },
+                        {
+                            "description": "The list of allowable resource types (for Target and anchors) in links included in the collection"
+                        }
+                    ]
                 },
                 "links": {
                     "$ref": "#/definitions/oic.collection.alllinks"
@@ -41,7 +41,11 @@
     },
     "type": "object",
     "allOf": [
-        {"$ref": "oic.core-schema.json#/definitions/oic.core"},
-        {"$ref": "#/definitions/oic.collection"}
+        {
+            "$ref": "oic.core-schema.json#/definitions/oic.core"
+        },
+        {
+            "$ref": "#/definitions/oic.collection"
+        }
     ]
 }
