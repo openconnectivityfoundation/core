@@ -20,15 +20,6 @@
                   "enum": ["oic.r.easysetup","oic.wk.col"]
               }
             },
-            "rts": {
-              "type": "array",
-              "minItems": 1,
-              "items": [
-                {
-                  "enum": ["oic.r.wificonf", "oic.r.devconf"]
-                }
-              ]
-            },
             "ps": {
               "type": "integer",
               "enum": [0, 1, 2, 3],
