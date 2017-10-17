@@ -1,0 +1,70 @@
+#%RAML 0.8
+title: Privacy Configuration
+version: v1-20171018
+documentation:
+- title: OCF Copyright
+  content: Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.
+- title: OCF License
+  content: !include LICENSE.md
+- title: OCF Disclaimer
+  content: !include DISCLAIMER.md
+
+schemas:
+-  priv: !include schemas/oic.wk.priv-schema.json
+
+traits:
+ - interface-rw :
+     queryParameters:
+       if:
+         enum: ["oic.if.rw"]
+ - interface-all :
+     queryParameters:
+       if:
+         enum: ["oic.if.rw", "oic.if.baseline"]
+
+/example/oic/priv:
+  displayName: Privacy configuration resource
+  description: |
+    Resource that allows for Device specific privacy information to be configured.
+
+  get:
+    description: |
+      Retrieves the current Device privacy configuration settings
+
+    is: ['interface-all']
+    responses :
+      200:
+        body:
+          application/json:
+            schema: priv
+            example: |
+              {
+                "rt":   ["oic.wk.priv"],
+                "id":   "unique_example_id",
+                "pm":   false
+              }
+
+  post:
+    description: |
+      Update the information about the Device privacy
+
+    is: ['interface-rw']
+    body:
+      application/json:
+        schema: priv
+        example: |
+          {
+            "id":   "unique_example_id",
+            "pm":   false
+          }
+
+    responses :
+      200:
+        body:
+          application/json:
+            schema: priv
+            example: |
+              {
+                  "id": "unique_example_id",
+                  "pm": false
+              }

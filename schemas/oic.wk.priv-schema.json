@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schemas.org/draft-04/schema#",
+  "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
+  "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.priv-schema.json#",
+  "definitions": {
+    "oic.wk.priv": {
+      "type": "object",
+      "properties": {
+        "pm": {
+          "type": "boolean",
+          "description": "Privacy Mode"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    { "$ref": "oic.core-schema.rw.json#/definitions/oic.core"},
+    { "$ref": "#/definitions/oic.wk.priv" }
+  ],
+  "required": ["pm"]
+}
