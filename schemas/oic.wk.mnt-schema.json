@@ -17,6 +17,10 @@
         "rb": {
           "type": "boolean",
           "description": "Reboot Action"
+        }        ,
+        "err": {
+          "type": "integer",
+          "description": "last occurred error"
         }
       }
     }
