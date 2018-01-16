@@ -1,0 +1,148 @@
+#%RAML 0.8
+title: CoAP Cloud Configuration Resource
+version: v0.0.3-20180116
+documentation:
+  - title: OCF Copyright
+    content: Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+schemas:
+  - CoAPCloudConf: !include schemas/oic.r.coapcloudconf-schema.json
+  - CoAPCloudConfUpdate: !include schemas/oic.r.coapcloudconf-update-schema.json
+
+traits:
+  - interface-all:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline","oic.if.rw"]
+
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
+
+  - interface-rw:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw"]
+
+
+/example/CoAPCloudConfBaselineInterfaceResURI:
+  description: |
+    CoAPCloudConf resource exposes configuration information for connecting to a
+    cloud server.
+  displayName: CoAP Cloud Configuration Resource Baseline Interface
+  is: [ interface-baseline ] # valid for baseline method.
+
+  get:
+    description: |
+      Retrieve all essential information used for cloud registration
+      1. Access Token & Access Token Type
+      2. Authentication provider name
+      3. Cloud interface server URL
+      4. Present Status & Error Code (optional)
+      5. Additonal configuration properties supported by device
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CoAPCloudConf
+            example: |
+              {
+                "rt": ["oic.r.coapcloudconf"],
+                "at": "0f3d9f7fe5491d54077d",
+                "att": "Bearer",
+                "apn": "Authentication server",
+                "cis": "https://CloudServerURI",
+                "cps": 0,
+                "clec": 0
+              }
+
+  post:
+    description: |
+      Update properties of CoAPCloudConf resource.
+
+    body:
+      application/json:
+        schema: CoAPCloudConfUpdate
+        example: |
+          {
+            "at": "0f3d9f7fe5491d54077d",
+            "att": "Bearer",
+            "apn": "Authentication server",
+            "cis": "https://CloudServerURI"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CoAPCloudConf
+            example: |
+              {
+                "at": "0f3d9f7fe5491d54077d",
+                "att": "Bearer",
+                "apn": "Authentication server",
+                "cis": "https://CloudServerURI",
+                "cps": 0,
+                "clec": 0
+              }
+
+/example/CoAPCloudConfRWInterfaceResURI:
+  description: |
+    CoAPCloudConf resource exposes configuration information for connecting to a
+    cloud server.
+  displayName: CoAP Cloud Configuration Resource Read Write Interface
+  is: [ interface-rw ] # valid for RW method.
+
+  get:
+    description: |
+      Retrieve all essential information used for cloud registration that can
+      be updated by a client.
+      1. Access Token & Access Token Type
+      2. Authentication provider name
+      3. Cloud interface server URL
+      4. Additonal configuration properties supported by device
+
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CoAPCloudConfUpdate
+            example: |
+              {
+                "rt": ["oic.r.coapcloudconf"],
+                "at": "0f3d9f7fe5491d54077d",
+                "att": "Bearer",
+                "apn": "Authentication server",
+                "cis": "https://CloudServerURI"
+              }
+  post:
+    description: |
+      Update properties of CoAPCloudConf resource.
+
+    body:
+      application/json:
+        schema: CoAPCloudConfUpdate
+        example: |
+          {
+            "at": "0f3d9f7fe5491d54077d",
+            "att": "Bearer",
+            "apn": "Authentication server",
+            "cis": "https://CloudServerURI"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            schema: CoAPCloudConf
+            example: |
+              {
+                "at": "0f3d9f7fe5491d54077d",
+                "att": "Bearer",
+                "apn": "Authentication server",
+                "cis": "https://CloudServerURI",
+              }
