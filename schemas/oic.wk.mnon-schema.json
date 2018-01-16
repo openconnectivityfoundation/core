@@ -5,16 +5,10 @@
   "title": "network monitoring",
   "definitions": {
     "nmon": {
-        "network": 
+        "ianaifType": 
         {
-            "type" : "string",
-            "enum": ["BLE", 
-                "Ethernet", 
-                "EnOcean", 
-                "WiFi",
-                "Zigbee",
-                "Zwave"],
-            "description": "The type of the network connection",
+            "type" : "integer",
+            "description": "The type of the network connection, as defined by iana https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib",
             "readOnly" : true
         },
         "reset" :
