@@ -62,5 +62,5 @@
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
     {"$ref": "#/definitions/nmon"}
   ],
-  "required": ["reset", "col"]
+  "required": ["reset", "col", "ianaifType"]
 }
