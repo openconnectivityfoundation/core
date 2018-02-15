@@ -42,16 +42,28 @@
             "description": "Amount of received kilo bytes from collection start time 'time'",
             "readOnly" : true
         },
-        "mms" :
+        "mmstx" :
         {
             "type" : "integer",
-            "description": "Maximum message size in bytes (tx and rx) in the collection period",
+            "description": "Maximum transmitted message size in bytes (tx) in the collection period",
             "readOnly" : true
         },
-        "ams" :
+        "amstx" :
         {
             "type" : "integer",
-            "description": "Average message size in bytes (tx and rx) in the collection period",
+            "description": "Average transmitted message size in bytes (tx) in the collection period",
+            "readOnly" : true
+        },
+        "mmsrx" :
+        {
+            "type" : "integer",
+            "description": "Maximum received message size in bytes (rx) in the collection period",
+            "readOnly" : true
+        },
+        "amsrx" :
+        {
+            "type" : "integer",
+            "description": "Average received message size in bytes (rx) in the collection period",
             "readOnly" : true
         }
     }
