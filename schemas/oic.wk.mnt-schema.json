@@ -20,6 +20,7 @@
         }        ,
         "err": {
           "type": "integer",
+          "readOnly" : true,
           "description": "last HTTP occurred error",
           "minimum" : 399,
           "maximum" : 599
