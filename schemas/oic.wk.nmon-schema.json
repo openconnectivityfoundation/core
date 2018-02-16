@@ -4,7 +4,9 @@
   "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "network monitoring",
   "definitions": {
-    "nmon": {
+    "oic.wk.nmon": {
+      "type": "object",
+      "properties": {
         "ianaifType": 
         {
             "type" : "integer",
@@ -66,13 +68,14 @@
             "description": "Average received message size in bytes (rx) in the collection period",
             "readOnly" : true
         }
+      }
     }
   },
   "type": "object",
   "allOf": [
     {"$ref": "oic.core.json#/definitions/oic.core"},
     {"$ref": "oic.baseResource.json#/definitions/oic.r.baseresource"},
-    {"$ref": "#/definitions/nmon"}
+    {"$ref": "#/definitions/oic.wk.nmon"}
   ],
   "required": ["reset", "col", "ianaifType"]
 }
