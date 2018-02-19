@@ -7,16 +7,17 @@
       "type": "object",
       "anyOf": [
         {"required": ["fr"]},
-        {"required": ["rb"]}
+        {"required": ["rb"]},
+        {"required": ["err"]}
       ],
       "properties": {
         "fr":{
           "type": "boolean",
-          "description": "Factory Reset"
+          "description": "Factory Reset, true= start factory reset, false=no action"
         },
         "rb": {
           "type": "boolean",
-          "description": "Reboot Action"
+          "description": "Reboot Action, true= start reboot, false=no action, after reboot the value shall be false"
         }        ,
         "err": {
           "type": "integer",
