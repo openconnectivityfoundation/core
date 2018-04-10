@@ -106,6 +106,10 @@
                 "format": "uri",
                 "description": "Transport Protocol Suite + Endpoint Locator"
               },
+              "hn": {
+                "type": "string",
+                "description": "Registered name (e.g., DNS name) which is resolved to a valid IP ddress for the target Resource."
+              },
               "pri": {
                 "type": "integer",
                 "minimum": 1,
