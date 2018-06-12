@@ -1,5 +1,5 @@
 {
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.con-Update-schema.json#",
+  "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.wk.con-Update-schema.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
   "definitions": {
@@ -68,7 +68,7 @@
         "dl": {
           "allOf": [
             {
-              "$ref": "oic.types-schema.json#/definitions/language-tag"
+              "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag"
             },
             {
               "description": "Default Language as an RFC 5646 language tag."
@@ -80,7 +80,7 @@
   },
   "type": "object",
   "allOf": [
-    { "$ref": "oic.core-schema.rw.json#/definitions/oic.core"},
+    { "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.core-schema.rw.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.con" }
   ]
 }

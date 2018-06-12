@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
   "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.d-schema.json#",
+  "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.wk.d-schema.json#",
   "definitions": {
     "oic.wk.d": {
       "type": "object",
@@ -9,7 +9,7 @@
         "di": {
           "allOf": [
             {
-              "$ref": "oic.types-schema.json#/definitions/uuid"
+              "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/uuid"
             },
             {
               "readOnly": true,
@@ -38,7 +38,7 @@
                 "language": {
                   "allOf": [
                     {
-                      "$ref": "oic.types-schema.json#/definitions/language-tag"
+                      "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag"
                     },
                     {
                       "readOnly": true,
@@ -73,7 +73,7 @@
                 "language": {
                   "allOf": [
                     {
-                      "$ref": "oic.types-schema.json#/definitions/language-tag"
+                      "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/language-tag"
                     },
                     {
                       "readOnly": true,
@@ -102,7 +102,7 @@
         "piid": {
           "allOf": [
             {
-              "$ref": "oic.types-schema.json#/definitions/uuid"
+              "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/uuid"
             },
             {
               "readOnly": true,
@@ -115,7 +115,7 @@
   },
   "type": "object",
   "allOf": [
-    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.d" }
   ],
   "required": [ "n", "di", "icv", "dmv", "piid" ]

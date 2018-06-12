@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schemas.org/draft-04/schema#",
   "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.p-schema.json#",
+  "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.wk.p-schema.json#",
   "definitions": {
     "oic.wk.p": {
       "type": "object",
@@ -9,7 +9,7 @@
         "pi": {
           "allOf": [
             {
-              "$ref": "oic.types-schema.json#/definitions/uuid"
+              "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/uuid"
             },
             {
               "readOnly": true,
@@ -45,7 +45,7 @@
         "mndt": {
           "allOf": [
             {
-              "$ref": "oic.types-schema.json#/definitions/date"
+              "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/date"
             },
             {
               "readOnly": true,
@@ -101,7 +101,7 @@
   },
   "type": "object",
   "allOf": [
-    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.p" }
   ],
   "required": [ "pi", "mnmn" ]

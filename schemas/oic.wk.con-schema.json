@@ -1,5 +1,5 @@
 {
-  "id": "https://www.openconnectivity.org/ocf-apis/core/schemas/oic.wk.con-schema.json#",
+  "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.wk.con-schema.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2016, 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "definitions": {
@@ -71,7 +71,7 @@
   },
   "type": "object",
   "allOf": [
-    { "$ref": "oic.core-schema.json#/definitions/oic.core"},
+    { "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.core-schema.json#/definitions/oic.core"},
     { "$ref": "#/definitions/oic.wk.con" }
   ],
   "required": ["n"]

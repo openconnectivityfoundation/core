@@ -1,5 +1,5 @@
 {
-  "id": "http://openinterconnect.org/schemas/oic.wk.nmon-update#",
+  "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.wk.nmon-update#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2017 Open Connectivity Foundation, Inc. All rights reserved.",
   "title": "network monitoring",
@@ -25,7 +25,7 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "oic.core-schema.rw.json#/definitions/oic.core"},
+    {"$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.core-schema.rw.json#/definitions/oic.core"},
     {"$ref": "#/definitions/oic.wk.nmon-update"}
   ],
   "required": ["reset", "col"]
