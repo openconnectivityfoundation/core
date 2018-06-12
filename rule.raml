@@ -1,0 +1,364 @@
+#%RAML 0.8
+title: Rule
+version: v0.1.1-20180529
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - rule-rw: !include schemas/oic.rule-rw-schema.json
+  - baseline: !include schemas/oic.core-schema.json
+  - batch: !include schemas/oic.batch-retrieve-schema.json
+  - linklist: !include schemas/oic.oic-linklist-schema.json
+  - linkupdate: !include schemas/oic.if.linkupdate-schema.json
+  - create: !include schemas/oic.if.create-schema.json
+  - create-response: !include schemas/oic.if.create-response-schema.json
+  - delete-Response: !include schemas/oic.if.delete-response-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw", "oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.create", "oic.if.delete", "oic.if.linkupdate"]
+
+
+/RuleURI?if=oic.if.baseline:
+    description: |
+      Baseline representation of a rule contains its common properties
+    displayName: rule-baseline
+
+    get:
+        description: |
+          Common properties of the rule resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: baseline
+                example: |
+                {
+                  "rt": ["oic.r.rule"],
+                  "if": ["oic.if.rw", "oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.linkupdate", "oic.if.create", "oic.if.delete" ],
+                  "rts": ["oic.r.temperature", "oic.r.switch.binary", "oic.r.scenevalue" ],
+                  "n": "Thermostat heat-on rule"
+                }
+
+
+/RuleURI?if=oic.if.ll:
+    description: |
+      Link list representation of a rule contains its links and bindings
+    displayName: rule-linklist
+
+    get:
+        description: |
+          Links of the rule resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: linklist
+                  example: |
+                    [
+                      {
+                        "rel": ["self", "item"]
+                      },
+                      {
+                        "href": "modeswitch",
+                        "rel": ["item", "ruleinput"],
+                        "rt": "oic.r.switch.binary",
+                        "if": ["oic.if.a", "oic.if.baseline" ]
+                      },
+                      {
+                        "href": "temperature",
+                        "rel": ["item", "ruleinput"],
+                        "rt": "oic.r.temperature",
+                        "if": ["oic.if.a", "oic.if.baseline" ]
+                      },
+                      {
+                        "href": "set-temperature",
+                        "rel": ["item", "ruleinput"],
+                        "rt": "oic.r.temperature",
+                        "if": ["oic.if.a", "oic.if.baseline" ]
+                      },
+                      {
+                        "href": "scenevalue",
+                        "rel": ["item", "ruleaction"],
+                        "rt": "oic.r.scenevalue",
+                        "if": ["oic.if.rw", "oic.if.baseline" ]
+                      },
+                      {
+                        "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                        "rel": ["boundto"],
+                        "bind": "obs",
+                        "anchor": "modeswitch",
+                        "if": ["oic.if.s"],
+                        "ins": "377fac40"
+                      },
+                      {
+                        "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/temperature",
+                        "rel": ["boundto"],
+                        "bind": "obs",
+                        "anchor": "temperature",
+                        "if": ["oic.if.s"],
+                        "ins": "f33a89b2"
+                      },
+                      {
+                        "href": "scenevalue",
+                        "rel": ["boundto"],
+                        "bind": "push",
+                        "anchor": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/heatcontrol",
+                        "if": ["oic.if.a"],
+                        "ins": "ca5f1004"
+                      },
+                      {
+                        "href": "377fac40",
+                        "rt": "oic.r.linkstatus",
+                        "if": ["oic.if.baseline", "oic.if.rw"]
+                      },
+                      {
+                        "href": "f33a89b2",
+                        "rt": "oic.r.linkstatus",
+                        "if": ["oic.if.baseline", "oic.if.rw"]
+                      },
+                      {
+                        "href": "ca5f1004",
+                        "rt": "oic.r.linkstatus",
+                        "if": ["oic.if.baseline", "oic.if.rw"]
+                      }
+                    ]
+
+
+/RuleURI?if=oic.if.rw:
+    description: |
+      Read/write representation of a rule contains the rule string
+    displayName: rule-rw
+
+    get:
+        description: |
+          Read/write interface of the rule resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: readwrite
+                  example: |
+                    {
+                      "rule": "(switch:value = true) and (temperature:temperature >= set-temp:temperature)",
+                      "ruleresult": false,
+                      "ruleenable": false,
+                      "actionenable": false
+                    }
+
+    post:
+      body:
+        application/json:
+          schema: rule-rw
+            example: |
+              {
+                "rule": "(switch:value = true) and (temperature:temperature >= set-temp:temperature)"
+              }
+      responses:
+        200:
+          body:
+            application/json:
+              schema: rule-rw
+                example: |
+                  {
+                    "rule": "(switch:value = true) and (temperature:temperature >= set-temp:temperature)",
+                    "ruleresult": false,
+                    "ruleenable": false,
+                    "actionenable": false
+                  }
+
+
+
+/RuleURI?if=oic.if.b:
+    description: |
+      Batch representation of a rule contains the rule string, rule inputs and rule actions
+    displayName: rule-batch
+
+    get:
+        description: |
+          Batch interface of the rule resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: batch
+                  example: |
+                    [
+                      {
+                        "href":"",
+                        "rep": {
+                          "rule": "(switch:value = true) and (temperature:temperature >= set-temp:temperature)",
+                          "ruleresult": false,
+                          "ruleenable": false,
+                          "actionenable": false
+                        }
+                      },
+                      {
+                        "href": "modeswitch",
+                        "rep": {
+                          "value": false
+                        }
+                      },
+                      {
+                        "href": "temperature",
+                        "rep": {
+                          "temperature": 23
+                      }
+                      },
+                      {
+                        "href": "set-temperature",
+                        "rep": {
+                          "temperature": 30
+                        }
+                      },
+                      {
+                        "href": "scenevalue",
+                        "rep": {
+                          "lastscene": "heat-off"
+                        }
+                      }
+                    ]
+
+
+/RuleURI/resURI?if=oic.if.create:
+    description: |
+      Create a rule input item using POST with oic.if.create, URI in the query parameter.
+      Creates a new resource in the collection and a link pointing to it.
+    displayName: rule-create
+
+    post:
+      description: |
+        Create interface of the rule resource type
+
+      queryParameters:
+        href:
+          type: string
+
+      body:
+        application/json:
+          schema: create
+            example: |
+              [
+                {
+                  "rt": "oic.r.switch.binary",
+                  "if": ["oic.if.a", "oic.if.baseline" ],
+                  "title":  "Heat Mode"
+                  "rep": {
+                    "rt": "oic.r.switch.binary",
+                    "if": ["oic.if.a", "oic.if.baseline" ]
+                    "value": false
+                  }
+                }
+              ]
+
+        responses:
+          200:
+            body:
+              application/json:
+                schema: create-response
+                  example: |
+                    [
+                      {
+                        "href": "modeswitch",
+                        "rt": ["oic.r.switch.binary"],
+                        "if": ["oic.if.a", "oic.if.baseline" ],
+                        "title":  "Heat Mode"
+                        "rep": {
+                          "rt": ["oic.r.switch.binary"],
+                          "if": ["oic.if.a", "oic.if.baseline" ]
+                          "value": false
+                        }
+                      }
+                    ]
+
+
+/RuleURI?if=oic.if.delete:
+    description: |
+      Delete interface of the rule resource type
+    displayName: delete
+
+    delete:
+        description: |
+          Delete method processing
+        responses:
+          200:
+            body:
+              application/json:
+                schema: delete-response
+                  example: |
+                    {
+                      "href": "/rules/heat-on/fanmode"
+                    }
+
+
+/RuleURI?if=oic.if.linkupdate:
+    description: |
+      To add links, send a link list format containing the links to be added.
+      To remove links, use query parameters to select link(s) to delete and send an empty link array [].
+      To modify links, use query parameters to select link(s) to patch and send the cbor.
+      Serialization of json merge-patch format using the linkupdate schema.
+    displayName: rule-linkupdate
+
+    post:
+        description: |
+          Add, delete, or modify links using the UPDATE operation on the array of links
+
+        queryParameters:
+          href:
+            type: string
+          rel:
+            type: string
+          rt:
+            type: string
+          ins:
+            type: string
+          location-tag:
+            type: string
+
+        body:
+          application/json:
+            schema: linklist
+              example: |
+                [
+                  {
+                    "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                    "rel": ["boundto"],
+                    "bind": "obs",
+                    "anchor": "modeswitch",
+                    "if": ["oic.if.s"],
+                    "ins": "377fac40"
+                  }
+                ]
+
+          application/merge-patch+json:
+            schema: linkupdate
+            example: |
+            {
+              "tag-location": ["studio"]
+            }
+
+        responses:
+          200:
+            application/json:
+              schema: linklist
+                example: |
+                  [
+                    {
+                      "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                      "rel": ["boundto"],
+                      "bind": "obs",
+                      "anchor": "modeswitch",
+                      "if": ["oic.if.s"],
+                      "ins": "377fac40",
+                      "tag-location": ["studio"]
+                    }
+                  ]
