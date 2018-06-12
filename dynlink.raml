@@ -1,0 +1,216 @@
+#%RAML 0.8
+title: Dynamic link resource definition
+version: v0.1.0-20180606
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - baseline: !include schemas/oic.core-schema.json
+  - batch: !include schemas/oic.batch-retrieve-schema.json
+  - linklist: !include schemas/oic.oic-linklist-schema.json
+  - linkupdate: !include schemas/oic.if.linkupdate-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: [oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.linkupdate"]
+
+
+/DynlinkResURI?if=oic.if.baseline:
+    description: |
+      Baseline representation of a dynlink contains only its common properties
+    displayName: dynlink-baseline
+
+    get:
+        description: |
+          Common properties of the dynlink resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: baseline
+                example: |
+                {
+                  "rt": ["oic.r.linkupdate"],
+                  "if": [oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.linkupdate"],
+                }
+
+
+/DynlinkResURI?if=oic.if.ll:
+    description: |
+      Link list representation of a dynlink contains its linkstatus and bindings
+    displayName: dynlink-linklist
+
+    get:
+        description: |
+          Links of the dynlink resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: linklist
+                  example: |
+                    [
+                      {
+                        "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                        "rel": ["boundto"],
+                        "bind": "obs",
+                        "anchor": "modeswitch",
+                        "if": ["oic.if.s"],
+                        "ins": "377fac40"
+                      },
+                      {
+                        "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/temperature",
+                        "rel": ["boundto"],
+                        "bind": "obs",
+                        "anchor": "temperature",
+                        "if": ["oic.if.s"],
+                        "ins": "f33a89b2"
+                      },
+                      {
+                        "href": "scenevalue",
+                        "rel": ["boundto"],
+                        "bind": "push",
+                        "anchor": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/heatcontrol",
+                        "if": ["oic.if.a"],
+                        "ins": "ca5f1004"
+                      },
+                      {
+                        "href": "377fac40",
+                        "rt": "oic.r.linkstatus",
+                        "if": ["oic.if.baseline", "oic.if.rw"],
+                        "linkinstance": "377fac40"
+                      },
+                      {
+                        "href": "f33a89b2",
+                        "rt": "oic.r.linkstatus",
+                        "if": ["oic.if.baseline", "oic.if.rw"],
+                        "linkinstance": "f33a89b2"
+                      },
+                      {
+                        "href": "ca5f1004",
+                        "rt": "oic.r.linkstatus",
+                        "if": ["oic.if.baseline", "oic.if.rw"],
+                        "linkinstance": "ca5f1004"
+                      }
+                    ]
+
+
+/DynlinkResURI?if=oic.if.b:
+    description: |
+      Batch representation of a dynlink contains the link status resources
+    displayName: dynlink-batch
+
+    get:
+        description: |
+          Batch interface of the dynlink resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: batch
+                  example: |
+                    [
+                      {
+                        "href": "377fac40",
+                        "rep": {
+                          "linkstate": "active",
+                          "laststatus": "200",
+                          "idletime": 2195,
+                          "maxidle": 6000,
+                          "linkinstance": "7ffe23ac"
+                        }
+                      },
+                      {
+                        "href": "f33a89b2",
+                        "rep": {
+                          "linkstate": "active",
+                          "laststatus": "200",
+                          "idletime": 662,
+                          "maxidle": 6000,
+                          "linkinstance": "f33a89b2"
+                        }
+                      },
+                      {
+                        "href": "ca5f1004",
+                        "rep": {
+                          "linkstate": "active",
+                          "laststatus": "200",
+                          "idletime": 970,
+                          "maxidle": 6000,
+                          "linkinstance": "ca5f1004"
+                        }
+                      }
+                    ]
+
+
+/DynlinkResURI?if=oic.if.linkupdate:
+    description: |
+      To add links, send a link list format containing the links to be added.
+      To remove links, use query parameters to select link(s) to delete and send an empty link array [].
+      To modify links, use query parameters to select link(s) to patch and send the cbor.
+      Serialization of json merge-patch format using the linkupdate schema.
+    displayName: dynlink-linkupdate
+
+    post:
+        description: |
+          add, delete, or modify Links using the UPDATE operation on the array of links
+
+        queryParameters:
+          href:
+            type: string
+          rel:
+            type: string
+          rt:
+            type: string
+          ins:
+            type: string
+          location-tag:
+            type: string
+
+        body:
+          application/json:
+            schema: linklist
+              example: |
+                [
+                  {
+                    "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                    "rel": ["boundto"],
+                    "bind": "obs",
+                    "anchor": "modeswitch",
+                    "if": ["oic.if.s"],
+                    "ins": "377fac40"
+                  }
+                ]
+
+          application/merge-patch+json:
+            schema: linkupdate
+            example: |
+            {
+              "tag-location": ["studio"]
+            }
+
+        responses:
+          200:
+            application/json:
+              schema: linklist
+                example: |
+                  [
+                    {
+                      "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                      "rel": ["boundto"],
+                      "bind": "obs",
+                      "anchor": "modeswitch",
+                      "if": ["oic.if.s"],
+                      "ins": "377fac40",
+                      "tag-location": ["studio"]
+                    }
+                  ]

@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "https://github.com/openconnectivityfoundation/core/schemas/oic.linkstatus-rw-schema.json#",
+    "title": "Linkstatus Resource Type",
+    "definitions": {
+      "linkstatus-properties": {
+        "properties": {
+          "linkstate": {
+            "type": "string",
+            "enum": [ "init", "active", "error", "timeout" ],
+            "readOnly": true,
+            "description": "The state of the dynlink"
+          },
+          "laststatus": {
+            "type": "number",
+            "enum": [200, 201, 400, 403, 404, 405, 406, 408, 409, 410, 415, 418, 429, 500, 501, 502, 503, 504],
+            "readOnly": true,
+            "description": "Last status code in http equivalent"
+		      },
+          "idletime": {
+            "type": "number",
+            "readOnly": true,
+            "description": "Seconds since last transfer on the dynlink"
+		      },
+          "maxidle": {
+            "type": "number",
+            "description": "Maximum idle seconds until timeout error"
+		      },
+          "linkinstance": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The instance parameter of the dynamic link"
+		      }
+        }
+      }
+    },
+    "type": "object",
+    "allOf": [
+      {"$ref": "#/definitions/linkstatus-properties"}
+    ],
+    "required": ["linkstate", "laststatus", "linkinstance"],
+    "additionalProperties": true
+}
