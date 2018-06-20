@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description" : "Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.",
-    "id": "https://github.com/openconnectivityfoundation/core/schemas/oic.linkstatus-rw-schema.json#",
+    "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.linkstatus-rw-schema.json#",
     "title": "Linkstatus Resource Type",
     "definitions": {
       "linkstatus-properties": {
@@ -18,13 +18,15 @@
             "readOnly": true,
             "description": "Last status code in http equivalent"
 		      },
-          "idletime": {
-            "type": "number",
+          "endtime": {
+            "type": "string",
+            "format": "date",
             "readOnly": true,
-            "description": "Seconds since last transfer on the dynlink"
+            "description": "Time at which the link times out if it remains idle"
 		      },
-          "maxidle": {
+          "maxwait": {
             "type": "number",
+            "readOnly": false,
             "description": "Maximum idle seconds until timeout error"
 		      },
           "linkinstance": {
