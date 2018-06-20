@@ -1,29 +1,21 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description" : "Copyright (c) 2016 Open Connectivity Foundation, Inc. All rights reserved.",
-    "id": "https://github.com/openconnectivityfoundation/core/schemas/oic.if.create-schema.json#",
+    "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.if.create-schema.json#",
     "title": "Create Format",
     "definitions": {
       "create-schema": {
         "type": "object",
         "properties": {
           "rel": {
-            "oneOf":[
-              {
-                "type": "array",
-                "items": {
-                    "type": "string",
-                    "maxLength": 64
-                  },
-                "minItems": 1,
-                "default": ["hosts"]
-              },
-              {
-                "type": "string",
-                "maxLength": 64,
-                "default": "hosts"
-              }
-            ],
+              "type": "array",
+              "items": {
+                  "type": "string",
+                  "maxLength": 64
+                },
+              "minItems": 1,
+              "default": ["hosts"]
+            },
           "description": "The relation of the target URI referenced by the link to the context URI"
           },
           "rt": {
