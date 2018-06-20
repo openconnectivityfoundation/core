@@ -253,11 +253,11 @@
     "oic.collection.links": {
       "properties": {
         "links": {
-	  "description": "A set of simple or individual OIC Links.",
+	        "description": "A set of simple or individual OIC Links.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/oic.oic-link"
-	  }
+	        }
         }
       }
     },
@@ -268,6 +268,10 @@
         "rts": {
           "$ref": "#/definitions/oic.core/properties/rt",
 		      "description": "The list of allowable resource types (for Target and anchors) in links included in the collection"
+        },
+        "rts-m": {
+          "$ref": "#/definitions/oic.core/properties/rt",
+          "description": "The list of mandatory resources if any in links included in the collection"
         }
       }
     }

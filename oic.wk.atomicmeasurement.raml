@@ -2,11 +2,11 @@
 #RAML for Atomic Measurement.
 #
 title: Atomic Measurement
-version: 0.1
+version: 1.0
 documentation:
 
   - title: OCF Copyright
-    content: Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.
+    content: Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
   - title: OCF License
     content: !include LICENSE.md
   - title: OCF Disclaimer
@@ -54,12 +54,12 @@ traits:
           enum: ["oic.if.ll"]
 
 
-/AtomicMeasurementURI?if=oic.if.baseline:
+/AtomicMeasurementResURI?if=oic.if.baseline:
   description: |
     The oic.if.baseline interface exposes a representation of the links and
     the common properties of the Atomic Measurement resource.
 
-  displayName: Baseline Interface
+  displayName: Atomic Measurement
   is: [ interface-baseline ]
 
   get:
@@ -81,27 +81,27 @@ traits:
                   {
                     "href": "temperature",
                     "rt":   ["oic.r.temperature"],
-                    "if":   ["oic.if.s", "oic.if.baseline"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
                   },
                   {
                     "href": "bodylocation",
                     "rt":   ["oic.r.body.location.temperature"],
-                    "if":   ["oic.if.s", "oic.if.baseline"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
                   },
                   {
                     "href": "timestamp",
                     "rt":   ["oic.r.time.stamp"],
-                    "if":   ["oic.if.s", "oic.if.baseline"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
                   }
                 ]
               }
 
 
-/AtomicMeasurementURI?if=oic.if.b:
+/AtomicMeasurementResURI?if=oic.if.b:
     description: |
       The oic.if.b interface returns data items retrieved from resources pointed to by the links.
 
-    displayName: Batch Representation
+    displayName: Atomic Measurement
     is: [ interface-b ]
 
     get:
@@ -143,11 +143,11 @@ traits:
                 ]
 
 
-/AtomicMeasurementURI?if=oic.if.ll:
+/AtomicMeasurementResURI?if=oic.if.ll:
     description: |
       The oic.if.ll interface exposes a representation of the links
 
-    displayName: Link List Representation
+    displayName: Atomic Measurement
     is: [ interface-ll ]
 
     get:
@@ -164,16 +164,16 @@ traits:
                   {
                     "href": "temperature",
                     "rt":   ["oic.r.temperature"],
-                    "if":   ["oic.if.s", "oic.if.baseline"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
                   },
                   {
                     "href": "bodylocation",
                     "rt":   ["oic.r.body.location.temperature"],
-                    "if":   ["oic.if.s", "oic.if.baseline"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
                   },
                   {
                     "href": "timestamp",
                     "rt":   ["oic.r.time.stamp"],
-                    "if":   ["oic.if.s", "oic.if.baseline"],
+                    "if":   ["oic.if.s", "oic.if.baseline"]
                   }
                 ]
