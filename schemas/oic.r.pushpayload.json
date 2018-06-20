@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.pushpayload.json#",
+    "title": "Push Payload Format",
+    "definitions": {
+      "oic.r.pushpayload": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "maxLength": 256,
+            "format": "uri",
+            "description": "URI of the resource being pushed"
+          },
+          "rt": {
+            "type": "array",
+            "items" : {
+                "type" : "string",
+                "maxLength": 64
+              },
+            "minItems" : 1,
+            "readOnly": true,
+            "description": "Resource Type of the resource being pushed"
+          },
+          "rep": {
+            "type": "object",
+            "description": "The push payload for a single resource"
+          }
+        },
+        "additionalProperties": true,
+        "required": ["rt","rep"]
+      }
+    },
+    "allOf": [
+      {"$ref": "#/definitions/oic.r.pushpayload"}
+    ]
+}
