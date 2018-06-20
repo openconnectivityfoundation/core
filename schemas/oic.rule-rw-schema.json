@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description" : "Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.",
-    "id": "https://github.com/openconnectivityfoundation/core/schemas/oic.rule-rw-schema.json#",
+    "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+    "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.rule-rw-schema.json#",
     "title": "Rule Resource Type",
     "definitions": {
       "rule-properties": {
@@ -9,19 +9,23 @@
           "rule": {
             "type": "string",
             "format": "ocf-rule-string",
-            "maxLength": 0,
+            "maxLength": 8192,
+            "readOnly": false,
             "description": "The rule itself, expressed as a string in the ABNF format specified"
           },
           "ruleresult": {
             "type": "boolean",
+            "readOnly": false,
             "description": "The boolean result of evaluating the rule with the current inputs"
 		      },
           "ruleenable": {
             "type": "boolean",
+            "readOnly": false,
             "description": "If true, the rule result is updated whenever any rule input is updated"
 		      },
           "actionenable": {
             "type": "boolean",
+            "readOnly": false,
             "description": "If true, actions are triggered on ruleenable value transition from false to true"
 		      }
         }
