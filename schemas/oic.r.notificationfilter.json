@@ -1,0 +1,20 @@
+{
+  "id": "http://openconnectivity.org/iotdatamodels/schemas/oic.r.notificationfilter.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Push Notification Filter",
+  "definitions": {
+    "oic.r.notificationfilter": {
+      "properties": {
+        "filter": {
+          "type": "string",
+	        "description": "Query string formatted as per CoAP rules, e.g. rt=oic.r.temperature&rt=oic.r.humidity"
+        }
+      }
+	  }
+  },
+  "type": "object",
+  "allOf": [
+    {"$ref": "#/definitions/oic.r.notificationfilter"}
+  ]
+}

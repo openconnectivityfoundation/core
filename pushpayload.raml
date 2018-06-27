@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: OCF Notification Receiver
+title: OCF Push Payload
 version: OCF2.x
 documentation:
   - title: (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
@@ -10,33 +10,44 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - Observers:  !include oic.r.observers.json
+  - Payload:  !include oic.r.pushpayload.json
 
 traits:
   - interface-all:
       queryParameters:
         if:
-          enum: ["oic.if.rw","oic.if.baseline"]
+          enum: ["oic.if.r", "oic.if.baseline"]
+  - interface-r:
+      queryParameters:
+        if:
+          enum: ["oic.if.r"]
+  - interface-baseline:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline"]
 
-/NotificationReceiverResURI?if=oic.if.rw:
+/PushpayloadResURI?if=oic.if.r:
   description: |
-    TBD
+    Resouurce that defines the payload within a Push notification sent from a Server.
 
-  displayName: Observers
-  is: [ interface-all] # valid for all methods
+  displayName: Payload
+  is: [ interface-all ] # valid for all methods
 
-  get:
+  post:
     description: |
-      Retrieves the current notification receiver information.
+      Defines the payload sent in a Push Notification (POST to a target URI).
+    body:
+      application/json:
+        schema: Payload
+        example: |
+          {
+            "href": "/mysensor",
+            "rt": ["oic.r.sensor.carbonmonoxide"],
+            "if": ["oic.if.s"],
+            "rep": {
+              "value": true
+            }
+          }
     responses:
       200:
-        body:
-          application/json:
-            schema: Observers
-            example: |
-              {
-                "filter": "rt=oic.r.sensor.carbonmonoxide",
-                "target": {
-                  "rt": ["oic.r.pushpayload"], "if": ["oic.if.r","oic.if.baseline"], "anchor": "coaps://targetURI"
-                }
-              }
+                
