@@ -32,10 +32,9 @@
   },
   "type": "object",
   "allOf": [
-    {"$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.baseResource.json#/definitions/oic.r.baseresource"},
+    {"$ref": "oic.core-schema.json#/definitions/oic.core"},
     {"$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.collection-schema.json#/definitions/oic.collection.properties"},
     {"$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.collection-schema.json#/definitions/oic.collection.links.arrayoflinks"},
     {"$ref": "#/definitions/oic.r.pushtarget"}
-  ],
-  "required": []
+  ]
 }
