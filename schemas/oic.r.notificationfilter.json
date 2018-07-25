@@ -7,8 +7,11 @@
     "oic.r.notificationfilter": {
       "properties": {
         "filter": {
-          "type": "string",
-	        "description": "Query string formatted as per CoAP rules, e.g. rt=oic.r.temperature&rt=oic.r.humidity"
+          "type": "array",
+	        "description": "Array of query strings formatted as per OCF rules, e.g. rt=oic.r.temperature&rt=oic.r.humidity",
+          "items": {
+            "type": "string"
+          }
         }
       }
 	  }

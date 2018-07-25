@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
-    "id": "http://www.openconnectivity.org/ocf-apis/core/schemas/oic.r.pushpayload.json#",
+    "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.r.pushpayload.json#",
     "title": "Push Payload Format",
     "definitions": {
       "oic.r.pushpayload": {
