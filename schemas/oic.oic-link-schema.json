@@ -64,7 +64,7 @@
           "type": "object",
           "properties": {
             "bm": {
-              "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+              "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable, discoverable, and pushable",
               "type": "integer"
             }
           },
