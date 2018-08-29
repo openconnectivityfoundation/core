@@ -7,6 +7,12 @@
       "oic.r.pushpayload": {
         "type": "object",
         "properties": {
+          "anchor": {
+            "type": "string",
+            "maxLength": 256,
+            "format": "uri",
+            "description": "Context URI of the resource being pushed"
+          },
           "href": {
             "type": "string",
             "maxLength": 256,
@@ -40,7 +46,7 @@
           }
         },
         "additionalProperties": true,
-        "required": ["rt","if","rep"]
+        "required": ["anchor","rt","if","rep"]
       }
     },
     "allOf": [

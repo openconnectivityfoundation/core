@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: OCF Push Target
+title: OCF Push Collector
 version: OCF2.x
 documentation:
   - title: (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
@@ -10,14 +10,14 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - TargetCollection:  !include oic.r.pushtargetcollection.json
-  - TargetCollection-ll: !include oic.collection.linkslist-schema.json
+  - Collector:  !include schemas/oic.r.pushtargetcollection.json
+  - Collector-ll: !include schemas/oic.collection.linkslist-schema.json
 
 traits:
   - interface-all:
       queryParameters:
         if:
-          enum: ["oic.if.ll","oic.if.create","oic.if.baseline"]
+          enum: ["oic.if.ll","oic.if.create","oic.if.linkupdate","oic.if.baseline"]
   - interface-baseline:
       queryParameters:
         if:
@@ -27,9 +27,9 @@ traits:
         if:
           enum: ["oic.if.ll"]
 
-/PushTargetResURI?if=oic.if.baseline:
+/PushCollectorResURI?if=oic.if.baseline:
   description: |
-    Collection of oic.r.dynlink or oic.r.dynlink composed with oic.r.notificationfilter.
+    Collection of oic.r.notificationfilter and associated Dynlinks.
     Allows a Server to be configured with one or more Push Notification destinations.
 
   displayName: Push Targets
@@ -42,21 +42,23 @@ traits:
       200:
         body:
           application/json:
-            schema: TargetCollection
+            schema: Collector
             example: |
               {
-                "rt": ["oic.r.pushtargetcollection"],
-                "if": ["oic.if.ll","oic.if.create","oic.if.baseline"],
+                "rt": ["oic.r.pushcollector"],
+                "if": ["oic.if.ll","oic.if.create","oic.if.linkupdate","oic.if.baseline"],
                 "links":                         [
-                  {"href": "/myObserverResURI", "rt": ["oic.r.dynlink","oic.r.notificationfilter"], "if": ["oic.if.ll","oic.if.linkupdate","oic.if.rw","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                  {"href": "/myObserver2ResURI", "rt": ["oic.r.dynlink"], "if": ["oic.if.ll","oic.if.linkupdate","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+                  {"href": "/myFilterResURI", "rt": ["oic.r.notificationfilter"], "if": ["oic.if.rw","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myFilter2ResURI", "rt": ["oic.r.notificationfilter"], "if": ["oic.if.rw","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myFilterResURI", "rel": "boundto", "bind": "push", "anchor": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/someURI", "ins": "cdaf5503"},
+                  {"href": "cdaf5503", "rt": ["oic.r.linkstatus"], "if": ["oic.if.baseline", "oic.if.rw"]}
                 ]
               }
 
 
 /PushTargetResURI?if=oic.if.ll:
   description: |
-    Collection of oic.r.dynlink or oic.r.dynlink composed with oic.r.notificationfilter.
+    Collection of oic.r.notificationfilter with associated Dynlinks.
     Allows a Server to be configured with one or more Push Notification destinations.
 
   displayName: Push Targets
@@ -69,9 +71,11 @@ traits:
       200:
         body:
           application/json:
-            schema: TargetCollection-ll
+            schema: Collector-ll
             example: |
               [
-                {"href": "/myObserverResURI", "rt": ["oic.r.dynlink","oic.r.notificationfilter"], "if": ["oic.if.ll","oic.if.linkupdate","oic.if.rw","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
-                {"href": "/myObserver2ResURI", "rt": ["oic.r.dynlink"], "if": ["oic.if.ll","oic.if.linkupdate","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+                {"href": "/myFilterResURI", "rt": ["oic.r.notificationfilter"], "if": ["oic.if.rw","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                {"href": "/myFilter2ResURI", "rt": ["oic.r.notificationfilter"], "if": ["oic.if.rw","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                {"href": "/myFilterResURI", "rel": "boundto", "bind": "push", "anchor": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/someURI", "ins": "cdaf5503"},
+                {"href": "cdaf5503", "rt": ["oic.r.linkstatus"], "if": ["oic.if.baseline", "oic.if.rw"]}
               ]

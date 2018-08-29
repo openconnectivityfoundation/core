@@ -1,8 +1,8 @@
 {
-  "id": "http://openconnectivity.org/iotdatamodels/schemas/oic.r.pushtarget.json#",
+  "id": "http://openconnectivity.org/iotdatamodels/schemas/oic.r.pushcollector.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
-  "title": "Push Notification Target",
+  "title": "Push Notification Collector",
   "definitions": {
     "oic.r.pushtarget": {
       "type": "object",
@@ -14,7 +14,7 @@
           "uniqueItems": true,
           "items": {
             "type" : "string",
-            "enum": ["oic.r.pushtarget"]
+            "enum": ["oic.r.pushcollector"]
           }
         },
         "rts": {
@@ -24,7 +24,7 @@
           "uniqueItems": true,
           "items": {
             "type" : "string",
-            "enum": ["oic.r.notificationfilter","oic.r.dynlink"]
+            "enum": ["oic.r.notificationfilter"]
           }
         }
       }
@@ -35,6 +35,6 @@
     {"$ref": "oic.core-schema.json#/definitions/oic.core"},
     {"$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.collection-schema.json#/definitions/oic.collection.properties"},
     {"$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.collection-schema.json#/definitions/oic.collection.links.arrayoflinks"},
-    {"$ref": "#/definitions/oic.r.pushtarget"}
+    {"$ref": "#/definitions/oic.r.pushcollector"}
   ]
 }
