@@ -28,11 +28,6 @@
             "type": "number",
             "readOnly": false,
             "description": "Maximum idle seconds until timeout error"
-		      },
-          "linkinstance": {
-            "type": "string",
-            "readOnly": true,
-            "description": "The instance parameter of the dynamic link"
 		      }
         }
       }

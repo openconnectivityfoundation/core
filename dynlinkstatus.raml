@@ -1,0 +1,89 @@
+#%RAML 0.8
+title: Dynlink status resource definition
+version: v0.1.1-20180620
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - baseline: !include schemas/oic.core-schema.json
+  - dynlinkstatus: !include schemas/oic.r.dynlinkstatus-schema.json
+  - delete-response: !include schemmas/oic.if.delete-response-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.baseline", "oic.if.rw", "oic.if.delete"]
+
+
+/DynlinkStatusResURI?if=oic.if.baseline:
+    description: |
+      Baseline representation of a dynlink status resource contains only its common properties
+    displayName: dynlink-baseline
+
+    get:
+        description: |
+          Common properties of the dynlink resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: baseline
+                example: |
+                  {
+                    "rt": ["oic.r.dynlinkstatus"],
+                    "if": ["oic.if.baseline", "oic.if.rw", "oic.if.delete"]
+                  }
+
+/DynlinkStatusResURI?if=oic.if.rw:
+    description: |
+      Dynlink status resource
+    displayName: dynlinkstatus
+
+    get:
+        description: |
+          Dynlink status resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: dynlinkstatus
+                  example: |
+                    {
+                      "linkstate": "active",
+                      "laststatus": 200,
+                      "endtime": "2018-10-22T13:11:05",
+                      "maxwait": 16400
+                    }
+
+
+/DynlinkResURI?if=oic.if.delete:
+    description: |
+      To delete this resource
+    displayName: dynlink-delete
+
+    delete:
+        description: |
+          delete resources
+
+        queryParameters:
+
+        body:
+
+        responses:
+          200:
+            application/json:
+              schema: delete-response
+                example: |
+                  [
+                    {
+                      "href": "3755f3ac"
+                    }
+                  ]

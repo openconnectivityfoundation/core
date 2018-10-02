@@ -15,13 +15,13 @@ schemas:
   - baseline: !include schemas/oic.core-schema.json
   - batch: !include schemas/oic.batch-retrieve-schema.json
   - linklist: !include schemas/oic.oic-linklist-schema.json
-  - linkupdate: !include schemas/oic.if.linkupdate-schema.json
+  - create: !include schemas/oic.if.create-schema.json
 
 traits:
   - interface:
       queryParameters:
         if:
-          enum: [oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.linkupdate"]
+          enum: [oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.linkadd", "oic.if.linkremove", "oic.if.create"]
 
 
 /DynlinkResURI?if=oic.if.baseline:
@@ -39,8 +39,8 @@ traits:
                 schema: baseline
                 example: |
                 {
-                  "rt": ["oic.r.linkupdate"],
-                  "if": [oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.linkupdate"],
+                  "rt": ["oic.r.dynlink"],
+                  "if": [oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.linkadd", "oic.if.linkremove", "oic.if.create"],
                 }
 
 
@@ -152,29 +152,16 @@ traits:
                     ]
 
 
-/DynlinkResURI?if=oic.if.linkupdate:
+/DynlinkResURI?if=oic.if.linkadd:
     description: |
       To add links, send a link list format containing the links to be added.
-      To remove links, use query parameters to select link(s) to delete and send an empty link array [].
-      To modify links, use query parameters to select link(s) to patch and send the cbor.
-      Serialization of json merge-patch format using the linkupdate schema.
-    displayName: dynlink-linkupdate
+    displayName: dynlink-linkadd
 
     post:
         description: |
           add, delete, or modify Links using the UPDATE operation on the array of links
 
         queryParameters:
-          href:
-            type: string
-          rel:
-            type: string
-          rt:
-            type: string
-          ins:
-            type: string
-          location-tag:
-            type: string
 
         body:
           application/json:
@@ -190,13 +177,6 @@ traits:
                     "ins": "377fac40"
                   }
                 ]
-
-          application/merge-patch+json:
-            schema: linkupdate
-            example: |
-            {
-              "tag-location": ["studio"]
-            }
 
         responses:
           200:
@@ -214,3 +194,86 @@ traits:
                       "tag-location": ["studio"]
                     }
                   ]
+
+/DynlinkResURI?if=oic.if.linkremove:
+    description: |
+      To remove links, use DELETE and a query parameter to select the link(s) to delete.
+    displayName: dynlink-linkremove
+
+    delete:
+        description: |
+          delete Links using the DELETE operation with a qiery selector on the array of links
+
+        queryParameters:
+          href:
+            type: string
+          rel:
+            type: string
+          rt:
+            type: string
+          ins:
+            type: string
+          location-tag:
+            type: string
+
+        body:
+
+        responses:
+          200:
+            application/json:
+              schema: linklist
+                example: |
+                  [
+                    {
+                      "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                      "rel": ["boundto"],
+                      "bind": "obs",
+                      "anchor": "modeswitch",
+                      "if": ["oic.if.s"],
+                      "ins": "377fac40",
+                      "tag-location": ["studio"]
+                    }
+                  ]
+
+
+/DynlinkResURI?if=oic.if.create:
+    description: |
+      To create new resources in a Dynlink collection
+    displayName: dynlink-create
+
+    post:
+        description: |
+          create resources
+
+        queryParameters:
+
+        body:
+          application/json:
+            schema: create
+              example: |
+                {
+                  "rt": ["oic.r.temperature"],
+                  "if": ["oic.if.a","oic.if.baseline"],
+                  "rep": {
+                    "rt": ["oic.r.temperature"],
+                    "if": ["oic.if.a","oic.if.baseline"],
+                    "temperature": 20
+                  }
+                }
+
+        responses:
+          200:
+            application/json:
+              schema: create
+                example: |
+                  {
+                    "href": "3755f3ac"
+                    "ins": "39724818",
+                    "rt": ["oic.r.temperature"],
+                    "if": ["oic.if.a","oic.if.baseline"],
+                    "rep": {
+                      "rt": ["oic.r.temperature"],
+                      "if": ["oic.if.a","oic.if.baseline"],
+                      "temperature": 20
+                    }
+                  }
