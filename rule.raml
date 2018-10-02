@@ -16,16 +16,15 @@ schemas:
   - baseline: !include schemas/oic.core-schema.json
   - batch: !include schemas/oic.batch-retrieve-schema.json
   - linklist: !include schemas/oic.oic-linklist-schema.json
-  - linkupdate: !include schemas/oic.if.linkupdate-schema.json
   - create: !include schemas/oic.if.create-schema.json
   - create-response: !include schemas/oic.if.create-response-schema.json
-  - delete-Response: !include schemas/oic.if.delete-response-schema.json
+  - delete-response: !include schemas/oic.if.delete-response-schema.json
 
 traits:
   - interface:
       queryParameters:
         if:
-          enum: ["oic.if.rw", "oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.create", "oic.if.delete", "oic.if.linkupdate"]
+          enum: ["oic.if.rw", "oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.create", "oic.if.delete", "oic.if.linkadd", oic.if.linkremove]
 
 
 /RuleURI?if=oic.if.baseline:
@@ -98,7 +97,7 @@ traits:
                         "bind": "obs",
                         "anchor": "modeswitch",
                         "if": ["oic.if.s"],
-                        "ins": "377fac40"
+                        "ins": 18436572
                       },
                       {
                         "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/temperature",
@@ -106,7 +105,7 @@ traits:
                         "bind": "obs",
                         "anchor": "temperature",
                         "if": ["oic.if.s"],
-                        "ins": "f33a89b2"
+                        "ins": 12345432
                       },
                       {
                         "href": "scenevalue",
@@ -114,7 +113,7 @@ traits:
                         "bind": "push",
                         "anchor": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/heatcontrol",
                         "if": ["oic.if.a"],
-                        "ins": "ca5f1004"
+                        "ins": 12343210
                       },
                       {
                         "href": "377fac40",
@@ -194,7 +193,7 @@ traits:
                   example: |
                     [
                       {
-                        "href":"",
+                        "href":"/RuleURI/",
                         "rep": {
                           "rule": "(switch:value = true) and (temperature:temperature >= set-temp:temperature)",
                           "ruleresult": false,
@@ -289,6 +288,15 @@ traits:
     delete:
         description: |
           Delete method processing
+
+        queryParameters:
+          href:
+            type: string
+          ins:
+            type: number
+          rt:
+            type: string
+
         responses:
           200:
             body:
@@ -300,29 +308,14 @@ traits:
                     }
 
 
-/RuleURI?if=oic.if.linkupdate:
+/RuleURI?if=oic.if.linkadd:
     description: |
       To add links, send a link list format containing the links to be added.
-      To remove links, use query parameters to select link(s) to delete and send an empty link array [].
-      To modify links, use query parameters to select link(s) to patch and send the cbor.
-      Serialization of json merge-patch format using the linkupdate schema.
     displayName: rule-linkupdate
 
     post:
         description: |
-          Add, delete, or modify links using the UPDATE operation on the array of links
-
-        queryParameters:
-          href:
-            type: string
-          rel:
-            type: string
-          rt:
-            type: string
-          ins:
-            type: string
-          location-tag:
-            type: string
+          Add links using the UPDATE operation on the array of links
 
         body:
           application/json:
@@ -335,16 +328,9 @@ traits:
                     "bind": "obs",
                     "anchor": "modeswitch",
                     "if": ["oic.if.s"],
-                    "ins": "377fac40"
+                    "ins": 18436572
                   }
                 ]
-
-          application/merge-patch+json:
-            schema: linkupdate
-            example: |
-            {
-              "tag-location": ["studio"]
-            }
 
         responses:
           200:
@@ -358,7 +344,35 @@ traits:
                       "bind": "obs",
                       "anchor": "modeswitch",
                       "if": ["oic.if.s"],
-                      "ins": "377fac40",
+                      "ins": 18436572,
+                      "tag-location": ["studio"]
+                    }
+                  ]
+
+/RuleURI?if=oic.if.linkremove:
+    description: |
+      To remove links, use the link remove interface with a query parameter to select the link(s).
+    displayName: rule-linkupdate
+
+    delete:
+        description: |
+          Add links using the UPDATE operation on the array of links
+
+        body:
+
+        responses:
+          200:
+            application/json:
+              schema: linklist
+                example: |
+                  [
+                    {
+                      "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                      "rel": ["boundto"],
+                      "bind": "obs",
+                      "anchor": "modeswitch",
+                      "if": ["oic.if.s"],
+                      "ins": 18436572,
                       "tag-location": ["studio"]
                     }
                   ]
