@@ -55,7 +55,7 @@ traits:
               ]
 
         responses:
-          200:
+          201:
             body:
               application/json:
                 schema: create-response
@@ -66,6 +66,7 @@ traits:
                         "rt": ["oic.r.switch.binary"],
                         "if": ["oic.if.a", "oic.if.baseline" ],
                         "n":  "Heat Mode",
+                        "ins": "39724818",
                         "rep": {
                           "rt": ["oic.r.switch.binary"],
                           "if": ["oic.if.a", "oic.if.baseline" ],
@@ -73,3 +74,29 @@ traits:
                         }
                       }
                     ]
+
+    get:
+      description: |
+        Get observe on create interface
+
+        responses:
+          201:
+            body:
+              application/json:
+                schema: create-response
+                  example: |
+                    [
+                      {
+                        "href": "modeswitch",
+                        "rt": ["oic.r.switch.binary"],
+                        "if": ["oic.if.a", "oic.if.baseline" ],
+                        "n":  "Heat Mode",
+                        "ins": "39724818",
+                        "rep": {
+                          "rt": ["oic.r.switch.binary"],
+                          "if": ["oic.if.a", "oic.if.baseline" ],
+                          "value": false
+                        }
+                      }
+                    ]
+          204:

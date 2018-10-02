@@ -1,0 +1,86 @@
+#%RAML 0.8
+title: Linkremove
+version: v0.1.1-20180606
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2016, 2017, 2018 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - linklist: !include schemas/oic.collection.linkslist-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.linkremove"]
+
+
+/LinkremoveResURI?if=oic.if.linkremove:
+    description: |
+      To remove links, use query parameters to select link(s) to delete.
+
+    displayName: linkremove
+
+    delete:
+        description: |
+          Remove links using the Delete operation on the array of links
+
+        queryParameters:
+          href:
+            type: string
+          rel:
+            type: string
+          rt:
+            type: string
+          ins:
+            type: string
+          location-tag:
+            type: string
+
+        body:
+
+        responses:
+          200:
+            application/json:
+              schema: linklist
+                example: |
+                  [
+                    {
+                      "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                      "rel": ["boundto"],
+                      "bind": "obs",
+                      "anchor": "modeswitch",
+                      "if": ["oic.if.s"],
+                      "ins": "377fac40",
+                      "tag-location": ["studio"]
+                    }
+                  ]
+
+    get:
+      description: |
+        Get observe on linkremove interface
+
+        responses:
+          200:
+            body:
+              application/json:
+                schema: linklist
+                  example: |
+                    [
+                      {
+                        "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                        "rel": ["boundto"],
+                        "bind": "obs",
+                        "anchor": "modeswitch",
+                        "if": ["oic.if.s"],
+                        "ins": "377fac40",
+                        "tag-location": ["studio"]
+                      }
+                    ]
+          204:

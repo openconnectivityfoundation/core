@@ -39,3 +39,17 @@ traits:
                     {
                       "href": "/rules/heat-on/fanmode"
                     }
+
+    get:
+        description: |
+          get observe on delete interface
+        responses:
+          200:
+            body:
+              application/json:
+                schema: delete-response
+                  example: |
+                    {
+                      "href": "/rules/heat-on/fanmode"
+                    }
+          204:
