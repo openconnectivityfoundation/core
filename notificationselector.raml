@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: OCF Notification Filter
+title: OCF Notification Selector
 version: OCF2.x
 documentation:
   - title: (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
@@ -10,7 +10,7 @@ documentation:
 
         THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED. IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 schemas:
-  - Filter:  !include oic.r.notificationfilter.json
+  - Selector :  !include schemas/oic.r.notificationselector.json
 
 traits:
   - interface-all:
@@ -18,35 +18,34 @@ traits:
         if:
           enum: ["oic.if.rw","oic.if.baseline"]
 
-/NotificationFilterResURI?if=oic.if.rw:
+/NotificationSelectorResURI?if=oic.if.rw:
   description: |
-    Resource that defines the filter for Push Notifications
-
-  displayName: Notification Filter
+    Resource that defines the selector for Push Notifications
+  displayName: Notification Selector
   is: [ interface-all] # valid for all methods
 
   get:
     description: |
-      Retrieves the current notification filter information.
+      Retrieves the current notification selector information.
     responses:
       200:
         body:
           application/json:
-            schema: Filter
+            schema: Selector
             example: |
               {
-                "filter": ["rt=oic.r.sensor.carbonmonoxide"]
+                "selector": ["rt=oic.r.sensor.carbonmonoxide"]
               }
 
   post:
     description: |
-      Updates the current notification filter information.
+      Updates the current notification selector information.
     body:
       application/json:
-        schema: Filter
+        schema: Selector
         example: |
           {
-            "filter": ["rt=oic.r.sensor.carbonmonoxide"]
+            "selector": ["rt=oic.r.sensor.carbonmonoxide"]
           }
 
     responses:

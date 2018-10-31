@@ -4,7 +4,7 @@
     "id": "http://openconnectivityfoundation.github.io/core/schemas/oic.r.pushpayload.json#",
     "title": "Push Payload Format",
     "definitions": {
-      "oic.r.pushpayload": {
+      "oic.r.pushpayloadentry": {
         "type": "object",
         "properties": {
           "anchor": {
@@ -49,7 +49,8 @@
         "required": ["anchor","rt","if","rep"]
       }
     },
-    "allOf": [
-      {"$ref": "#/definitions/oic.r.pushpayload"}
-    ]
+    "type": "array",
+    "items": {
+      "$ref": "#/definitions/oic.r.pushpayload"
+    }
 }
