@@ -51,6 +51,6 @@
     },
     "type": "array",
     "items": {
-      "$ref": "#/definitions/oic.r.pushpayload"
+      "$ref": "#/definitions/oic.r.pushpayloadentry"
     }
 }

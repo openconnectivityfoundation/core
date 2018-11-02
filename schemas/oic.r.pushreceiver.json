@@ -12,7 +12,12 @@
           "format": "uri"
         },
         "rts": {
-          "$ref": "http://openconnectivityfoundation.github.io/core/schemas/oic.core-schema.json#/definitions/oic.core/properties/rt",
+          "type": "array",
+          "items" : {
+            "type" : "string",
+            "maxLength": 64
+          },
+          "minItems" : 1,
           "description": "The list of allowable resource types for this instance of a push receiver"
         }
       },
