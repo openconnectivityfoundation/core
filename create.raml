@@ -25,17 +25,13 @@ traits:
 
 /CreateResURI?if=oic.if.create:
     description: |
-      Create an item using POST with oic.if.create, URI in the query parameter
-      Creates a new resource in the collection and a link pointing to it
+      Create an item using POST with oic.if.create,
+      Creates a new Resource and a link in the Collection that points to the new Resource
     displayName: create
 
     post:
       description: |
-        Create interface example
-
-      queryParameters:
-        href:
-          type: string
+        Create payload example
 
       body:
         application/json:
@@ -45,10 +41,10 @@ traits:
                 {
                   "rt": "oic.r.switch.binary",
                   "if": ["oic.if.a", "oic.if.baseline" ],
-                  "n":  "Heat Mode",
+                  "title": "Heat Mode",
                   "rep": {
                     "rt": "oic.r.switch.binary",
-                    "if": ["oic.if.a", "oic.if.baseline" ],
+                    "if": ["oic.if.a", "oic.if.baseline", "oic.if.delete"],
                     "value": false
                   }
                 }
@@ -62,14 +58,14 @@ traits:
                   example: |
                     [
                       {
-                        "href": "modeswitch",
+                        "href": "/17649986",
                         "rt": ["oic.r.switch.binary"],
                         "if": ["oic.if.a", "oic.if.baseline" ],
-                        "n":  "Heat Mode",
+                        "title": "Heat Mode",
                         "ins": "39724818",
                         "rep": {
                           "rt": ["oic.r.switch.binary"],
-                          "if": ["oic.if.a", "oic.if.baseline" ],
+                          "if": ["oic.if.a", "oic.if.baseline", "oic.if.delete"],
                           "value": false
                         }
                       }
@@ -87,14 +83,14 @@ traits:
                   example: |
                     [
                       {
-                        "href": "modeswitch",
+                        "href": "/17649986",
                         "rt": ["oic.r.switch.binary"],
-                        "if": ["oic.if.a", "oic.if.baseline" ],
-                        "n":  "Heat Mode",
+                        "if": ["oic.if.a", "oic.if.baseline", "oic.if.delete"],
+                        "title": "Heat Mode",
                         "ins": "39724818",
                         "rep": {
                           "rt": ["oic.r.switch.binary"],
-                          "if": ["oic.if.a", "oic.if.baseline" ],
+                          "if": ["oic.if.a", "oic.if.baseline", "oic.if.delete"],
                           "value": false
                         }
                       }

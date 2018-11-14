@@ -32,16 +32,8 @@ traits:
           Remove links using the Delete operation on the array of links
 
         queryParameters:
-          href:
-            type: string
-          rel:
-            type: string
-          rt:
-            type: string
           ins:
-            type: string
-          location-tag:
-            type: string
+            type: integer
 
         body:
 
@@ -53,12 +45,9 @@ traits:
                   [
                     {
                       "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
-                      "rel": ["boundto"],
-                      "bind": "obs",
-                      "anchor": "modeswitch",
-                      "if": ["oic.if.s"],
-                      "ins": "377fac40",
-                      "tag-location": ["studio"]
+                      "rt": ["oic.r.switch.binary"],
+                      "if": ["oic.if.s", "oic.if.baseline"],
+                      "ins": 37723440
                     }
                   ]
 
@@ -75,12 +64,9 @@ traits:
                     [
                       {
                         "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
-                        "rel": ["boundto"],
-                        "bind": "obs",
-                        "anchor": "modeswitch",
+                        "rt": ["oic.r.switch.binary"],
                         "if": ["oic.if.s"],
-                        "ins": "377fac40",
-                        "tag-location": ["studio"]
+                        "ins": 37723440
                       }
                     ]
           204:

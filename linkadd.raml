@@ -31,18 +31,6 @@ traits:
         description: |
           Add links using the UPDATE operation on the array of links
 
-        queryParameters:
-          href:
-            type: string
-          rel:
-            type: string
-          rt:
-            type: string
-          ins:
-            type: string
-          location-tag:
-            type: string
-
         body:
           application/json:
             schema: linklist
@@ -50,10 +38,8 @@ traits:
                 [
                   {
                     "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
-                    "rel": ["boundto"],
-                    "bind": "obs",
-                    "anchor": "modeswitch",
-                    "if": ["oic.if.s"]
+                    "rt": ["oic.r.switch.binary"],
+                    "if": ["oic.if.s", "oic.if.baseline"]
                   }
                 ]
 
@@ -66,11 +52,9 @@ traits:
                   [
                     {
                       "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
-                      "rel": ["boundto"],
-                      "bind": "obs",
-                      "anchor": "modeswitch",
-                      "if": ["oic.if.s"],
-                      "ins": "377fac40"
+                      "rt": ["oic.r.switch.binary"],
+                      "if": ["oic.if.s", "oic.if.baseline"],
+                      "ins": 37723440
                     }
                   ]
 
@@ -87,11 +71,9 @@ traits:
                     [
                       {
                         "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
-                        "rel": ["boundto"],
-                        "bind": "obs",
-                        "anchor": "modeswitch",
-                        "if": ["oic.if.s"],
-                        "ins": "377fac40"
+                        "rt": ["oic.r.switch.binary"],
+                        "if": ["oic.if.s", "oic.if.baseline"],
+                        "ins": 37723440
                       }
                     ]
           204:

@@ -10,7 +10,7 @@
           "href": {
             "type": "string",
             "maxLength": 256,
-            "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+            "description": "URI of the created resource.",
             "format": "uri"
           },
           "rel": {
@@ -45,7 +45,7 @@
             "type": "array",
             "items": {
                 "type" : "string",
-                "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s", "oic.if.create", "oic.if.delete","oic.if.linkupdate" ]
+                "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s", "oic.if.create", "oic.if.delete","oic.if.linkadd", "oic.if.linkremove" ]
               },
             "minItems": 1,
             "description": "The interface set supported by this resource"
@@ -103,7 +103,7 @@
                 "type": "array",
                 "items": {
                     "type" : "string",
-                    "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s", "oic.if.create", "oic.if.delete","oic.if.linkupdate" ]
+                    "enum" : ["oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.rw", "oic.if.r", "oic.if.a", "oic.if.s", "oic.if.create", "oic.if.delete","oic.if.linkadd", "oic.if.linkremove" ]
                   },
                 "minItems": 1,
                 "description": "The interface set supported by this resource"
