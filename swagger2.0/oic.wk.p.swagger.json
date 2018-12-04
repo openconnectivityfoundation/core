@@ -212,6 +212,19 @@
           "minItems": 1,
           "readOnly": true,
           "type": "array"
+        },
+        
+       "mnnct" :
+                {
+          "description": "An array of integer and each integer indicates the network connectivity type based on IANAIfType value as defined by: https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib, e.g., [71, 259] which represents Wi-Fi and zigbee",
+          "items": {
+            "type": "integer",
+			"minimum": 1,
+			"description": "The network connectivity type based on IANAIfType value as defined by: https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
         }
 
         }
