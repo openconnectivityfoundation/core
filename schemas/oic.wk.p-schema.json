@@ -95,6 +95,16 @@
           "maxLength": 64,
           "readOnly": true,
           "description": "Manufacturer's defined information for the platform. The content is freeform, with population rules up to the manufacturer"
+        },
+       "nct": {
+          "type": "array",		  
+          "items": {
+            "type": "integer",
+			"description": "The network connectivity type based on IANAIfType value as defined by: https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib"
+          },
+          "minItems": 1,
+		  "readOnly": true,
+          "description": "An array of integer and each integer indicates the network connectivity type based on IANAIfType value as defined by: https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib, e.g., [71, 259] which represents Wi-Fi and zigbee"              
         }
       }
     }
