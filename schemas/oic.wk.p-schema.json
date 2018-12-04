@@ -100,7 +100,7 @@
           "type": "array",		  
           "items": {
             "type": "integer",
-	    "minimum": 1
+	    "minimum": 1,
 	    "description": "The network connectivity type based on IANAIfType value as defined by: https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib"
           },
           "minItems": 1,
