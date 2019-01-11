@@ -4,13 +4,21 @@
     "title": "Push Receiver",
     "version": "OCF2.x",
     "license": {
-      "name": "copyright 2018 Open Connectivity Foundation, Inc. All rights reserved.",
-      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
-    }
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/PushReceiverResURI?if=oic.if.rw" : {
       "get": {
@@ -19,37 +27,37 @@
           {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
-            "200": {
-              "description" : "",
-              "x-example":
-                {
-                  "receivers": [
-                    {"receiveruri": "/mylocaltargeturiforthermostats",
-                     "rts": ["oic.r.temperature","oic.r.humidity"]},
-                    {"receiveruri": "/mylocaltargeturifordontcare",
-                     "rts": []}
-                  ]
-                },
-              "schema": { "$ref": "#/definitions/Receiver" }
-            }
+          "200": {
+            "description" : "",
+            "x-example": {
+              "receivers": [
+                {"receiveruri": "/mylocaltargeturiforthermostats",
+                 "rts": ["oic.r.temperature","oic.r.humidity"]},
+                {"receiveruri": "/mylocaltargeturifordontcare",
+                 "rts": []}
+              ]
+            },
+            "schema": { "$ref": "#/definitions/Receiver" }
+          }
         }
       },
       "post": {
         "description": "Updates the current push receiver information\n",
         "parameters": [
-          {"$ref": "#/parameters/interface-all"},
+          {
+            "$ref": "#/parameters/interface-all"
+          },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": { "$ref": "#/definitions/Receiver" },
-            "x-example":
-              {
-                "receivers": [
-                  {"receiveruri": "/mylocaltargeturifordontcare",
-                   "rts": []}
-                ]
-              }
+            "x-example": {
+              "receivers": [
+                {"receiveruri": "/mylocaltargeturifordontcare",
+                 "rts": []}
+              ]
+            }
           }
         ],
         "responses": {
@@ -71,34 +79,34 @@
   "definitions": {
     "Receiver" : {
 	  "type": "object",
-      "properties": {
-        "receivers" : {
-          "description": "Array of query strings formatted as per OCF rules, e.g. rt=oic.r.temperature&rt=oic.r.humidity",
-          "items": {
-            "properties": {
-              "receiveruri": {
-                "format": "uri",
+    "properties": {
+      "receivers" : {
+        "description": "Definitions of URIs at which push payloads may be received",
+        "items": {
+          "properties": {
+            "receiveruri": {
+              "format": "uri",
+              "type": "string"
+            },
+            "rts": {
+              "description": "The list of allowable resource types for this instance of a push receiver",
+              "items": {
+                "maxLength": 64,
                 "type": "string"
               },
-              "rts": {
-                "description": "The list of allowable resource types for this instance of a push receiver",
-                "items": {
-                  "maxLength": 64,
-                  "type": "string"
-                },
-                "minItems": 1,
-                "type": "array"
-              }
-            },
-            "required": [
-              "receiveruri",
-              "rts"
-            ],
-            "type": "object"
+              "minItems": 1,
+              "type": "array"
+            }
           },
-          "type": "array"
-        }
-      },
+          "required": [
+            "receiveruri",
+            "rts"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      }
+    },
 	  "required": ["receivers"]
     }
   }
