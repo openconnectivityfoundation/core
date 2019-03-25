@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Push Receiver",
-    "version": "OCF2.x",
+    "version": "2019-03-25",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -20,9 +20,9 @@
     "application/json"
   ],
   "paths": {
-    "/PushReceiverResURI?if=oic.if.rw" : {
+    "/PushReceiverResURI" : {
       "get": {
-        "description": "Resource that defines the receiver for Push Notifications\nRetrieves the current push receiver information.\n",
+        "description": "Resource that defines the receiver for Push Notifications",
         "parameters": [
           {"$ref": "#/parameters/interface-all"}
         ],
@@ -45,7 +45,7 @@
         "description": "Updates the current push receiver information\n",
         "parameters": [
           {
-            "$ref": "#/parameters/interface-all"
+            "$ref": "#/parameters/interface-rw"
           },
           {
             "name": "body",
@@ -74,6 +74,12 @@
       "name" : "if",
       "type" : "string",
       "enum" : ["oic.if.rw", "oic.if.baseline"]
+    },
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw"]
     }
   },
   "definitions": {
@@ -89,7 +95,7 @@
               "type": "string"
             },
             "rts": {
-              "description": "The list of allowable resource types for this instance of a push receiver",
+              "description": "The list of allowable Resource Types for this instance of a push receiver",
               "items": {
                 "maxLength": 64,
                 "type": "string"

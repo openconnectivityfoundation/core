@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Notification Selector",
-    "version": "OCF2.x",
+    "version": "2019-03-25",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -20,9 +20,9 @@
     "application/json"
   ],
   "paths": {
-    "/NotificationSelectorResURI?if=oic.if.rw" : {
+    "/NotificationSelectorResURI" : {
       "get": {
-        "description": "Resource that defines the selector for Push Notifications\nRetrieves the current notification selector information.\n",
+        "description": "Resource that defines the selector for Push Notifications",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -83,17 +83,20 @@
               "oic.if.baseline",
               "oic.if.rw"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "readOnly": true,
+          "uniqueItems": true,
           "type": "array"
         },
         "rt": {
           "description": "Resource Type of the Resource",
           "items": {
             "enum": ["oic.r.notificationselector"],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "uniqueItems": true,

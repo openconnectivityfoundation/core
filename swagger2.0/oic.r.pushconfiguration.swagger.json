@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Push Configuration",
-    "version": "OCF2.x",
+    "version": "2019-03-25",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -24,7 +24,7 @@
       "get": {
         "description": "Collection of oic.r.notificationselector with associated push proxies.\nAllows a Server to be configured with one or more Push Notification destinations.\n",
         "parameters": [
-          {"$ref": "#/parameters/interface-ll"}
+          {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
           "200": {
@@ -42,7 +42,7 @@
       "get": {
         "description": "Collection of oic.r.notificationselector and associated push proxies.\nAllows a Server to be configured with one or more Push Notification destinations.\n",
         "parameters": [
-          {"$ref": "#/parameters/interface-baseline"}
+          {"$ref": "#/parameters/interface-all"}
         ],
         "responses": {
           "200": {
@@ -62,18 +62,6 @@
     }
   },
   "parameters": {
-    "interface-ll" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.ll"]
-    },
-    "interface-baseline" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.baseline"]
-    },
     "interface-all" : {
       "in" : "query",
       "name" : "if",
@@ -91,13 +79,14 @@
     "oic.oic-link": {
       "properties": {
         "if": {
-          "description": "The interface set supported by this resource",
+          "description": "The OCF Interface set supported by the target Resource",
           "items": {
             "enum": [
               "oic.if.baseline",
               "oic.if.rw"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "uniqueItems": true,
@@ -105,16 +94,16 @@
           "type": "array"
         },
         "rt": {
-          "description": "Resource Type of the Resource",
+          "description": "Resource Type of the target Resource",
           "items": {
             "enum": [
               "oic.r.notificationselector",
               "oic.r.pushproxy"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
-          "maxItems": 2,
           "uniqueItems": true,
           "readOnly": true,
           "type": "array"
@@ -159,7 +148,8 @@
         "rt": {
           "items": {
             "enum": ["oic.r.pushconfiguration"],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "type": "array",
@@ -177,9 +167,9 @@
               "oic.r.notificationselector",
               "oic.r.pushproxy"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
-          "maxItems": 2,
           "minItems": 1,
           "type": "array",
           "uniqueItems": true
@@ -188,7 +178,7 @@
           "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
         },
         "if": {
-          "description": "The interface set supported by this resource",
+          "description": "The OCF Interface set supported by this Resource",
           "items": {
             "enum": [
               "oic.if.baseline",
@@ -196,7 +186,8 @@
               "oic.if.create",
               "oic.if.delete"
             ],
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           },
           "minItems": 1,
           "readOnly": true,

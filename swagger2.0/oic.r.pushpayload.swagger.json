@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Payload",
-    "version": "OCF2.x",
+    "version": "2019-03-25",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
@@ -20,7 +20,7 @@
     "application/json"
   ],
   "paths": {
-    "/PushpayloadResURI?if=oic.if.r" : {
+    "/PushpayloadResURI" : {
       "post": {
         "description": "Defines the payload sent in a Push Notification (POST to a target URI).\n",
         "parameters": [
@@ -54,18 +54,6 @@
     }
   },
   "parameters": {
-    "interface-r" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.r"]
-    },
-    "interface-baseline" : {
-      "in" : "query",
-      "name" : "if",
-      "type" : "string",
-      "enum" : ["oic.if.baseline"]
-    },
     "interface-all" : {
       "in" : "query",
       "name" : "if",
@@ -108,7 +96,7 @@
             "type": "array"
           },
           "rep": {
-            "description": "The push payload for a single resource",
+            "description": "The push payload for a single Resource",
             "type": "object"
           },
           "rt": {
