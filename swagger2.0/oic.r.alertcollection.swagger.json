@@ -1,0 +1,626 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Alert Collection",
+    "version": "OCF2.x-",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/AlertCollectionResURI?if=oic.if.b" : {
+      "get": {
+        "description": "This Resource is a Collection containing instances of Alerts (oic.r.alert).\nThis is the response using the Batch interface.\nRetrieves the current alert information\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-b"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                [
+                  {
+                    "href": "/Alert1ResURI",
+                    "rep":{
+                      "rt":            ["oic.r.alert"],
+                      "id":            "unique_example_id",
+                      "accountid":     "MyAccountID",
+                      "category":      "MyCategory",
+                      "timestamp": "2018-02-28T08:00:00Z",
+                      "originatorid": "MyOriginatorID",
+                      "severity": 3,
+                      "subject": [{"language":"en-US","value":"System error"}]
+                    }
+                  },
+                  {
+                    "href": "/Alert2ResURI",
+                    "rep":{
+                      "rt":            ["oic.r.alert"],
+                      "id":            "unique_example_id",
+                      "accountid":     "MyAccountID",
+                      "category":      "MyCategory",
+                      "timestamp": "2018-02-28T08:15:00Z",
+                      "originatorid": "MyOriginatorID",
+                      "severity": 4,
+                      "subject": [{"language":"en-US","value":"Network error"}]
+                    }
+                  }
+                ],
+              "schema": { "$ref": "#/definitions/AlertCollection-b" }
+            }
+        }
+      }
+    },
+    "/AlertCollectionResURI?if=oic.if.baseline" : {
+      "get": {
+        "description": "This Resource is a Collection containing instances of Alerts (oic.r.alert).\nThis is the response using the baseline interface.\nRetrieves the current alert information.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-baseline"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt":    ["oic.r.alertcollection"],
+                  "rts":   ["oic.r.alert"],
+                  "id":    "unique_example_id",
+                  "links": [
+                    {"href": "/myAlert1ResURI", "rt": ["oic.r.alert"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myAlert2ResURI", "rt": ["oic.r.alert"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myAlert3ResURI", "rt": ["oic.r.alert"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                    {"href": "/myAlert4ResURI", "rt": ["oic.r.alert"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+                  ]
+                },
+              "schema": { "$ref": "#/definitions/AlertCollection" }
+            }
+        }
+      }
+    },
+    "/AlertCollectionResURI?if=oic.if.ll" : {
+      "get": {
+        "description": "This Resource is a Collection containing instances of Alerts (oic.r.alert).\nThis is the response using the Link List interface.\nRetrieves the current alert information\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-ll"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                [
+                  {"href": "/myAlert1ResURI", "rt": ["oic.r.alert"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myAlert2ResURI", "rt": ["oic.r.alert"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myAlert3ResURI", "rt": ["oic.r.alert"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]},
+                  {"href": "/myAlert4ResURI", "rt": ["oic.r.alert"], "if": ["oic.if.s","oic.if.baseline"], "eps": [{"ep": "coaps://[fe80::b1d6]:1122"}]}
+                ],
+              "schema": { "$ref": "#/definitions/AlertCollection-ll" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-ll" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.ll"]
+    },
+    "interface-b" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.b"]
+    },
+    "interface-baseline" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.baseline"]
+    },
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.ll", "oic.if.b", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "AlertCollection-b" : {
+      "title": "Collection Batch Retrieve Format (auto merged)",
+      "minItems": 1,
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "href": {
+            "description": "URI of the target resource relative assuming the collection URI as anchor",
+            "format": "uri",
+            "maxLength": 256,
+            "type": "string"
+          },
+          "rep": {
+            "oneOf": [
+              {
+                "description": "The response payload from a single resource",
+                "type": "object"
+              },
+              {
+                "description": " The response payload from a collection (batch) resource",
+                "items": {
+                  "properties": {
+                    "anchor": {
+                      "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
+                      "format": "uri",
+                      "maxLength": 256,
+                      "type": "string"
+                    },
+                    "di": {
+                      "allOf": [
+                        {
+                          "description": "An identifier formatted according to IETF RFC 4122.",
+                          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                          "type": "string"
+                        },
+                        {
+                          "description": "The device ID"
+                        }
+                      ]
+                    },
+                    "eps": {
+                      "description": "the Endpoint information of the target Resource",
+                      "items": {
+                        "properties": {
+                          "ep": {
+                            "description": "Transport Protocol Suite + Endpoint Locator",
+                            "format": "uri",
+                            "type": "string"
+                          },
+                          "pri": {
+                            "description": "The priority among multiple Endpoints",
+                            "minimum": 1,
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "href": {
+                      "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+                      "format": "uri",
+                      "maxLength": 256,
+                      "type": "string"
+                    },
+                    "if": {
+                      "description": "The interface set supported by this resource",
+                      "items": {
+                        "enum": [
+                          "oic.if.baseline",
+                          "oic.if.ll",
+                          "oic.if.b",
+                          "oic.if.rw",
+                          "oic.if.r",
+                          "oic.if.a",
+                          "oic.if.s"
+                        ],
+                        "type": "string"
+                      },
+                      "minItems": 1,
+                      "type": "array"
+                    },
+                    "ins": {
+                      "description": "The instance identifier for this web link in an array of web links - used in collections",
+                      "type": "integer"
+                    },
+                    "p": {
+                      "description": "Specifies the framework policies on the Resource referenced by the target URI",
+                      "properties": {
+                        "bm": {
+                          "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "bm"
+                      ],
+                      "type": "object"
+                    },
+                    "rel": {
+                      "description": "The relation of the target URI referenced by the link to the context URI",
+                      "oneOf": [
+                        {
+                          "default": [
+                            "hosts"
+                          ],
+                          "items": {
+                            "maxLength": 64,
+                            "type": "string"
+                          },
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        {
+                          "default": "hosts",
+                          "maxLength": 64,
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "rt": {
+                      "description": "Resource Type of the Resource",
+                      "items": {
+                        "maxLength": 64,
+                        "type": "string"
+                      },
+                      "minItems": 1,
+                      "type": "array"
+                    },
+                    "title": {
+                      "description": "A title for the link relation. Can be used by the UI to provide a context.",
+                      "maxLength": 64,
+                      "type": "string"
+                    },
+                    "type": {
+                      "default": "application/cbor",
+                      "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+                      "items": {
+                        "maxLength": 64,
+                        "type": "string"
+                      },
+                      "minItems": 1,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "href",
+                    "rt",
+                    "if"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "required": [
+          "href",
+          "rep"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "AlertCollection" : {
+      "properties": {
+        "rt": {
+          "items": {
+            "enum": [
+              "oic.r.alertcollection"
+            ]
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "links": {
+          "description": "A set of simple or individual OIC Links.",
+          "items": {
+            "properties": {
+              "anchor": {
+                "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
+                "format": "uri",
+                "maxLength": 256,
+                "type": "string"
+              },
+              "di": {
+                "description": "The Device ID formatted according to IETF RFC 4122.",
+                "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                "type": "string"
+              },
+              "eps": {
+                "description": "the Endpoint information of the target Resource",
+                "items": {
+                  "properties": {
+                    "ep": {
+                      "description": "Transport Protocol Suite + Endpoint Locator",
+                      "format": "uri",
+                      "type": "string"
+                    },
+                    "pri": {
+                      "description": "The priority among multiple Endpoints",
+                      "minimum": 1,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "href": {
+                "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+                "format": "uri",
+                "maxLength": 256,
+                "type": "string"
+              },
+              "if": {
+                "description": "The interface set supported by this resource",
+                "items": {
+                  "enum": [
+                    "oic.if.baseline",
+                    "oic.if.ll",
+                    "oic.if.b",
+                    "oic.if.rw",
+                    "oic.if.r",
+                    "oic.if.a",
+                    "oic.if.s"
+                  ],
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "ins": {
+                "description": "The instance identifier for this web link in an array of web links - used in collections",
+                "type": "integer"
+              },
+              "p": {
+                "description": "Specifies the framework policies on the Resource referenced by the target URI",
+                "properties": {
+                  "bm": {
+                    "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "bm"
+                ],
+                "type": "object"
+              },
+              "rel": {
+                "description": "The relation of the target URI referenced by the link to the context URI",
+                "oneOf": [
+                  {
+                    "default": [
+                      "hosts"
+                    ],
+                    "items": {
+                      "maxLength": 64,
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                  },
+                  {
+                    "default": "hosts",
+                    "maxLength": 64,
+                    "type": "string"
+                  }
+                ]
+              },
+              "rt": {
+                "description": "Resource Type of the Resource",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "title": {
+                "description": "A title for the link relation. Can be used by the UI to provide a context.",
+                "maxLength": 64,
+                "type": "string"
+              },
+              "type": {
+                "default": "application/cbor",
+                "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "required": [
+              "href",
+              "rt",
+              "if"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "n": {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "rts": {
+          "items": {
+            "anyOf": [
+              {
+                "enum": [
+                  "oic.r.alert"
+                ]
+              },
+              {
+                "enum": [
+                  "oic.r.alert",
+                  "oic.r.value.conditional"
+                ]
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "id": {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "if": {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.ll",
+              "oic.if.b",
+              "oic.if.lb",
+              "oic.if.rw",
+              "oic.if.r",
+              "oic.if.a",
+              "oic.if.s"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type" : "object",
+      "required": ["rt","rts","links"]
+    },
+    "AlertCollection-ll" : {
+      "items": {
+        "properties": {
+          "anchor": {
+            "description": "This is used to override the context URI e.g. override the URI of the containing collection.",
+            "format": "uri",
+            "maxLength": 256,
+            "type": "string"
+          },
+          "di": {
+            "description": "The Device ID formatted according to IETF RFC 4122.",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+            "type": "string"
+          },
+          "eps": {
+            "description": "the Endpoint information of the target Resource",
+            "items": {
+              "properties": {
+                "ep": {
+                  "description": "Transport Protocol Suite + Endpoint Locator",
+                  "format": "uri",
+                  "type": "string"
+                },
+                "pri": {
+                  "description": "The priority among multiple Endpoints",
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "href": {
+            "description": "This is the target URI, it can be specified as a Relative Reference or fully-qualified URI.",
+            "format": "uri",
+            "maxLength": 256,
+            "type": "string"
+          },
+          "if": {
+            "description": "The interface set supported by this resource",
+            "items": {
+              "enum": [
+                "oic.if.baseline",
+                "oic.if.ll",
+                "oic.if.b",
+                "oic.if.rw",
+                "oic.if.r",
+                "oic.if.a",
+                "oic.if.s"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "ins": {
+            "description": "The instance identifier for this web link in an array of web links - used in collections",
+            "type": "integer"
+          },
+          "p": {
+            "description": "Specifies the framework policies on the Resource referenced by the target URI",
+            "properties": {
+              "bm": {
+                "description": "Specifies the framework policies on the Resource referenced by the target URI for e.g. observable and discoverable",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "bm"
+            ],
+            "type": "object"
+          },
+          "rel": {
+            "description": "The relation of the target URI referenced by the link to the context URI",
+            "oneOf": [
+              {
+                "default": [
+                  "hosts"
+                ],
+                "items": {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              {
+                "default": "hosts",
+                "maxLength": 64,
+                "type": "string"
+              }
+            ]
+          },
+          "rt": {
+            "description": "Resource Type of the Resource",
+            "items": {
+              "maxLength": 64,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "title": {
+            "description": "A title for the link relation. Can be used by the UI to provide a context.",
+            "maxLength": 64,
+            "type": "string"
+          },
+          "type": {
+            "default": "application/cbor",
+            "description": "A hint at the representation of the resource referenced by the target URI. This represents the media types that are used for both accepting and emitting.",
+            "items": {
+              "maxLength": 64,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "href",
+          "rt",
+          "if"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "title": "Alert Collection Link List Schema (auto merged)"
+    }
+  }
+}

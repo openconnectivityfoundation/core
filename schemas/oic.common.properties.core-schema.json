@@ -1,0 +1,20 @@
+{
+  "id": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description" : "Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.",
+  "title": "Common resource properties (core specification)",
+  "definitions": {
+     "n": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Friendly name of the resource"
+     },
+     "id": {
+          "type": "string",
+          "maxLength": 64,
+          "readOnly": true,
+          "description": "Instance ID of this specific resource"
+     }
+  }
+}

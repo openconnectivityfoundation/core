@@ -1,0 +1,153 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Alert",
+    "version": "OCF2.x",
+    "license": {
+      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/AlertResURI" : {
+      "get": {
+        "description": "This Resource provides a mechanism for a Server to expose information to an\ninterested party with regard to error or other conditions that the Device is experiencing (Alerts).\ncategory is a string that contains the Device defined category for the Alert.\ntimestamp is an RFC3339 formatted time at which the Alert was generated.\noriginatorid is a string that contains the identity of the originator of the Alert.\nseverity is an integer that contains the RFC5424 defined severity of the Alert.\nsubject is an array containing human readable text in one or more languages.\naccountid is a string containing the identity of the account with which the Device is associated.\nRetrieves the current alert information.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example":
+                {
+                  "rt":           ["oic.r.alert"],
+                  "id":           "unique_example_id",
+                  "accountid":    "MyAccountID",
+                  "category":     "MyCategory",
+                  "timestamp":    "2018-02-28T08:00:00Z",
+                  "originatorid": "MyOriginatorID",
+                  "severity":     3,
+                  "subject":      [{"language":"en-US","value":"System error"}]
+                },
+              "schema": { "$ref": "#/definitions/Alert" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.r", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "Alert" : {
+      "properties": {
+        "category": {
+          "description": "category into which the notification is classified",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "rt": {
+          "description": "Resource Type",
+          "items": {
+            "maxLength": 64,
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+        "severity": {
+          "description": "RFC 5424 severity of the alert",
+          "maximum": 7,
+          "minimum": 0,
+          "readOnly": true,
+          "type": "integer"
+        },
+        "timestamp": {
+          "description": "An RFC3339 formated time indicating when the data was observed (e.g.: 2016-02-15T09:19Z, 1996-12-19T16:39:57-08:00)",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "Alert subject matter.",
+          "items": {
+            "properties": {
+              "language": {
+                "allOf": [
+                  {
+                    "description": "An identifier formatted according to IETF RFC 5646 (langusge tag).",
+                    "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$",
+                    "type": "string"
+                  },
+                  {
+                    "description": "An RFC 5646 language tag.",
+                    "readOnly": true
+                  }
+                ]
+              },
+              "value": {
+                "description": "Alert subject matter in the indicated language.",
+                "maxLength": 255,
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        },
+        "originatorid": {
+          "description": "ID of the creator of the event",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "n": {
+          "description": "Friendly name of the resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "accountid": {
+          "description": "ID of the account",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "id": {
+          "description": "Instance ID of this specific resource",
+          "maxLength": 64,
+          "readOnly": true,
+          "type": "string"
+        },
+        "if": {
+          "description": "The interface set supported by this resource",
+          "items": {
+            "enum": [
+              "oic.if.baseline",
+              "oic.if.r"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type" : "object",
+      "required": ["category", "timestamp", "originatorid", "severity"]
+    }
+  }
+}

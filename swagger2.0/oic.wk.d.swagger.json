@@ -4,7 +4,7 @@
     "title": "Device",
     "version": "v1-20160622",
     "license": {
-      "name": "copyright 2016-2017 Open Connectivity Foundation, Inc. All rights reserved.",
+      "name": "copyright 2016-2019 Open Connectivity Foundation, Inc. All rights reserved.",
       "x-description": "Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n        1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n        2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n        THIS SOFTWARE IS PROVIDED BY THE Open Connectivity Foundation, INC. \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE OR WARRANTIES OF NON-INFRINGEMENT, ARE DISCLAIMED.\n        IN NO EVENT SHALL THE Open Connectivity Foundation, INC. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)\n        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n"
     }
   },
@@ -14,7 +14,7 @@
   "paths": {
     "/oic/d" : {
       "get": {
-        "description": "Known resource that is hosted by every Server.\nAllows for logical device specific information to be discovered.\nRetrieve the information about the Device\n",
+        "description": "Known Resource that is hosted by every Server.\nAllows for logical Device specific information to be discovered.\n",
         "parameters": [
           {"$ref": "#/parameters/interface"}
         ],
@@ -29,8 +29,7 @@
                   "icv":  "ocf.1.0.0",
                   "dmv":  "ocf.res.1.0.0, ocf.sh.1.0.0",
                   "piid": "6F0AAC04-2BB0-468D-B57C-16570A26AE48"
-                }
-                ,
+                },
               "schema": { "$ref": "#/definitions/Device" }
             }
         }
@@ -48,8 +47,7 @@
   "definitions": {
     "Device" : {
       "properties": {
-        "rt" :
-                {
+        "rt" :  {
           "description": "Resource Type of the Resource",
           "items": {
             "maxLength": 64,
@@ -59,9 +57,7 @@
           "readOnly": true,
           "type": "array"
         },
-
-        "ld" :
-                {
+        "ld" :  {
           "description": "Localized Descriptions.",
           "items": {
             "properties": {
@@ -91,9 +87,7 @@
           "readOnly": true,
           "type": "array"
         },
-
-        "piid" :
-                {
+        "piid" : {
           "allOf": [
             {
               "description": "Format pattern according to IETF RFC 4122.",
@@ -106,9 +100,7 @@
             }
           ]
         },
-
-        "di" :
-                {
+        "di" : {
           "allOf": [
             {
               "description": "Format pattern according to IETF RFC 4122.",
@@ -121,25 +113,19 @@
             }
           ]
         },
-
-        "dmno" :
-                {
+        "dmno" :  {
           "description": "Model number as designated by manufacturer.",
           "maxLength": 64,
           "readOnly": true,
           "type": "string"
         },
-
-        "sv" :
-                {
+        "sv" :  {
           "description": "Software version.",
           "maxLength": 64,
           "readOnly": true,
           "type": "string"
         },
-
-        "dmn" :
-                {
+        "dmn" :  {
           "description": "Manufacturer Name.",
           "items": {
             "properties": {
@@ -169,41 +155,32 @@
           "readOnly": true,
           "type": "array"
         },
-
         "icv" :
                 {
-          "description": "The version of the OIC Server",
+          "description": "The version of the OCF Server",
           "maxLength": 64,
           "readOnly": true,
           "type": "string"
         },
-
-        "dmv" :
-                {
+        "dmv" :  {
           "description": "Spec versions of the Resource and Device Specifications to which this device data model is implemented",
           "maxLength": 256,
           "readOnly": true,
           "type": "string"
         },
-
-        "n" :
-                {
+        "n" :  {
           "description": "Friendly name of the resource",
           "maxLength": 64,
           "readOnly": true,
           "type": "string"
         },
-
-        "id" :
-                {
+        "id" :  {
           "description": "Instance ID of this specific resource",
           "maxLength": 64,
           "readOnly": true,
           "type": "string"
         },
-
-        "if" :
-                {
+        "if" :  {
           "description": "The interface set supported by this resource",
           "items": {
             "enum": [
@@ -222,8 +199,8 @@
           "readOnly": true,
           "type": "array"
         }
-
-        },
+      },
+      "type" : "object",
       "required": ["n", "di", "icv", "dmv", "piid"]
     }
   }
