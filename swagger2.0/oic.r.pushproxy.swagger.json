@@ -1,0 +1,194 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Push Proxy",
+    "version": "2019-04-11",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://openconnectivityfoundation.github.io/core/LICENSE.md",
+      "x-copyright": "Copyright 2019 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/PushProxyResURI" : {
+      "get": {
+        "description": "Resource that when composed with another Resource allows for events to be pushed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface-all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description" : "",
+            "x-example": {
+              "n":    "My Friendly Device Name",
+              "rt":   ["oic.r.pusproxy"],
+              "pushtarget": "ocf://850faa5d-ccaf-4293-9452-f4fcab2e2c39/light",
+              "pushqif":    "oic.if.a",
+              "sourcert":   ["oic.r.switch.binary"]
+            },
+            "schema": {
+              "$ref": "#/definitions/PushProxy"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Update the Push Proxy Properties",
+        "parameters": [
+          {
+            "$ref": "#/parameters/interface-rw"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PushProxy-Update"
+            },
+            "x-example": {
+              "pushtarget": "ocf://850faa5d-ccaf-4293-9452-f4fcab2e2c39/thermostat/settemp",
+              "pushqif":    "oic.if.a",
+              "sourcert":   ["oic.r.temperature"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "x-example":  {
+              "pushtarget": "ocf://850faa5d-ccaf-4293-9452-f4fcab2e2c39/thermostat/settemp",
+              "pushqif":    "oic.if.a",
+              "sourcert":   ["oic.r.temperature"]
+            },
+            "schema": {
+              "$ref": "#/definitions/PushProxy-Update"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-rw" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw"]
+    },
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "PushProxy": {
+      "properties": {
+        "rt":  {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "enum": ["oic.r.pushproxy"],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "if": {
+          "description": "The OCF Interfaces supported by this Resource",
+          "items": {
+            "enum": [
+              "oic.if.rw",
+              "oic.if.baseline"
+            ],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 2,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "pushtarget": {
+          "description": "Resource that is the target of the push.  This can be local to the Device or remote",
+          "type": "string"
+        },
+        "pushqif": {
+          "description": "OCF Interface to be used in the UPDATE operation",
+          "maxLength": 64,
+          "type": "string",
+          "enum": [
+            "oic.if.baseline",
+            "oic.if.b",
+            "oic.if.rw",
+            "oic.if.a"
+          ]
+        },
+        "sourcert": {
+          "description": "Set of one or more source Resource Types that define the payload in the UPDATE operation",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "n": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "id": {
+          "$ref" : "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        }
+      },
+      "type" : "object",
+      "required": ["pushtarget", "pushqif", "sourcert"]
+    },
+    "PushProxy-Update" : {
+      "properties": {
+        "pushtarget": {
+          "description": "Resource that is the target of the push.  This can be local to the Device or remote",
+          "type": "string"
+        },
+        "pushqif": {
+          "description": "OCF Interface to be used in the UPDATE operation",
+          "maxLength": 64,
+          "type": "string",
+          "enum": [
+            "oic.if.baseline",
+            "oic.if.b",
+            "oic.if.rw",
+            "oic.if.a"
+          ]
+        },
+        "sourcert": {
+          "description": "Set of one or more source Resource Types that define the payload in the UPDATE operation",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "type" : "object",
+      "required": ["pushtarget", "pushqif", "sourcert"]
+    }
+  }
+}
