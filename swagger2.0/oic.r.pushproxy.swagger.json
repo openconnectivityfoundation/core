@@ -141,6 +141,7 @@
           "maxLength": 64,
           "type": "string",
           "enum": [
+            "waitingforprovisioning",
             "waitingforupdate",
             "waitingforresponse",
             "error",
