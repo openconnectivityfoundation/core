@@ -32,8 +32,8 @@
           "200": {
             "description" : "",
             "x-example": {
-              "n":    "My Friendly Device Name",
-              "rt":   ["oic.r.pusproxy"],
+              "n":    "My Friendly Resource Name",
+              "rt":   ["oic.r.pushproxy"],
               "pushtarget": "ocf://850faa5d-ccaf-4293-9452-f4fcab2e2c39/light",
               "pushqif":    "oic.if.a",
               "sourcert":   ["oic.r.switch.binary"],
@@ -116,7 +116,7 @@
           "type": "string"
         },
         "pushqif": {
-          "description": "OCF Interface to be used in the UPDATE operation.",
+          "description": "OCF Interface to be used in the UPDATE operation to the target of the push.",
           "maxLength": 64,
           "type": "string",
           "enum": [
@@ -180,7 +180,7 @@
           "type": "string"
         },
         "pushqif": {
-          "description": "OCF Interface to be used in the UPDATE operation",
+          "description": "OCF Interface to be used in the UPDATE operation to the target of the push",
           "maxLength": 64,
           "type": "string",
           "enum": [
@@ -197,20 +197,19 @@
             "type": "string",
             "maxLength": 64
           },
-          "state": {
-            "description": "Current state of the push proxy.",
-            "maxLength": 64,
-            "type": "string",
-            "enum": [
-              "waitingforupdate"
-            ]
-          },
           "minItems": 1,
           "uniqueItems": true
+        },
+        "state": {
+          "description": "Current state of the push proxy.",
+          "maxLength": 64,
+          "type": "string",
+          "enum": [
+            "waitingforupdate"
+          ]
         }
       },
-      "type" : "object",
-      "required": ["pushtarget", "pushqif", "sourcert"]
+      "type" : "object"
     }
   }
 }
