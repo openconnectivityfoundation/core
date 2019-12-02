@@ -57,7 +57,7 @@
     }
   },
   "definitions": {
-    "Device": {
+    "DeviceProperties": {
       "properties": {
         "rt":  {
           "description": "Resource Type of the Resource",
@@ -206,8 +206,13 @@
           "readOnly": true
         }
       },
-      "type": "object",
-      "required": ["n", "di", "icv", "dmv", "piid"]
+      "type": "object"
+    },
+    "Device": {
+      "allOf": [
+        {"$ref":"#/definitions/DeviceProperties"},
+        {"required": ["n", "di", "icv", "dmv", "piid"]}
+      ]
     }
   }
 }
