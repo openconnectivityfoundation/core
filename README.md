@@ -37,3 +37,4 @@ In the Collections case a Client can determine how to apply the IDD definition f
 -	The Client can then retrieve the Resource using the provided URL using the *oic.if.baseline* OCF Interface
 -	The Resource Representation returned provides the Client with the Resource Type of the created Resource (referenced below as **{created RT}**)
 -	The Client knows how to deal with the created Resource from the "/Collection Root/**{created RT}**" URL in the IDD
+
