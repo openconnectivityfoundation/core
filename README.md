@@ -6,7 +6,7 @@ https://openconnectivity.org/specs/OCF_Core_Specification.pdf
 
 ## referencing files with full URL
 
-This repo uses the github pages feature. e.g. all files can be accessed by using the URL:
+This repo uses the GitHub pages feature. e.g. all files can be accessed by using the URL:
 
 http://openconnectivityfoundation.github.io/core/
 
@@ -25,7 +25,7 @@ The full url can be used to reference a property definition. For example to refe
 
 [introspectiondevicedataexample.swagger.json](https://github.com/openconnectivityfoundation/core/tree/master/examples/introspectiondevicedataexample.swagger.json) illustrates a simple device that exposes an instance of a Binary Switch Resource and an instance of a Brightness Resource
 
-[introspectiondevicedataexample.swagger.json](https://github.com/openconnectivityfoundation/core/tree/master/examples/introspectiondevicedataexample-collections.swagger.json) illustrates a case where the Device supports the ability to create instances of Binary Switch and instances of Humidity via a Collection that exposes the "oic.if.create" OCF Interface.
+[introspectiondevicedataexample-collections.swagger.json](https://github.com/openconnectivityfoundation/core/tree/master/examples/introspectiondevicedataexample-collections.swagger.json) illustrates a case where the Device supports the ability to create instances of Binary Switch and instances of Humidity via a Collection that exposes the *oic.if.create* OCF Interface.
 
 ### Applying the IDD to a created Resource
 
