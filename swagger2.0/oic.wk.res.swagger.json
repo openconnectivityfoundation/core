@@ -293,6 +293,17 @@
             "items": {
               "$ref": "#/definitions/oic.oic-link"
             }
+          },
+          "sduuid": {
+            "description": "A UUID that identifies the Security Domain.",
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+            "readOnly": true
+          },
+          "sdname": {
+            "description": "Human-friendly name for the Security Domain.",
+            "type": "string",
+            "readOnly": true
           }
         },
         "required": [
