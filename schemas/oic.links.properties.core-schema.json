@@ -81,6 +81,12 @@
                       "type": "integer",
                       "minimum": 1,
                       "description": "The priority among multiple OCF Endpoints"
+                  },
+                  "lat": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "exclusiveMinimum": true,
+                      "description": "The expected latency in seconds, always > 0"
                   }
               }
           }
