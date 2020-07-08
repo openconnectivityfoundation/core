@@ -29,8 +29,7 @@
       "anchor": {
           "type": "string",
           "maxLength": 256,
-          "description": "This is used to override the context URI e.g. override the URI of the containing Collection.",
-          "format": "uri"
+          "description": "Provides the basis for the rel relationship to the href. May be a URI or a descriptive label."
       },
       "di": {
           "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.types-schema.json#/definitions/uuid",
