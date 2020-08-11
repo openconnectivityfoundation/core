@@ -43,6 +43,16 @@
        "description": "Descriptive function of the Resource, contains a valid OCF enumeration value",
        "type": "string",
        "readOnly": true
+     },
+     "tag-locn": {
+       "allOf": [
+         {
+           "$ref": "oic.types-schema.json#/definitions/locn-descriptions"
+         },
+         {
+           "description": "Descriptive location of the Resource"
+         }
+       ]
      }
   }
 }

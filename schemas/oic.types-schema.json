@@ -36,6 +36,16 @@
         "pos-descriptions": {
           "type": "string",
           "enum": ["unknown","top","bottom","left","right","centre","topleft","bottomleft","centreleft","centreright","bottomright","topright","topcentre","bottomcentre"]
+        },
+        "locn-descriptions": {
+          "type": "string",
+          "enum": ["unknown","attic","balcony","ballroom","bathroom","bedroom","border","boxroom","cellar","cloakroom",
+            "conservatory","corridor","deck","den","diningroom","drawingroom","driveway","dungeon","ensuite",
+            "entrance","familyroom","garage","garden","guestroom","hall","indoor","kitchen","larder","lawn",
+            "library","livingroom","lounge","mancave","masterbedroom","musicroom","office","outdoor","pantry",
+            "parkinglot","parlour","patio","receiptionroom","restroom","roof","roofterrace","sauna","shed",
+            "sittingroom","snug","spa","studio","suite","swimmingpool","terrace","toilet","utilityroom",
+            "vegetableplot","ward","yard"]
         }
     }
 }
