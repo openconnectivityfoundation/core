@@ -43,8 +43,8 @@
             "conservatory","corridor","deck","den","diningroom","drawingroom","driveway","dungeon","ensuite",
             "entrance","familyroom","garage","garden","guestroom","hall","indoor","kitchen","larder","lawn",
             "library","livingroom","lounge","mancave","masterbedroom","musicroom","office","outdoor","pantry",
-            "parkinglot","parlour","patio","receiptionroom","restroom","roof","roofterrace","sauna","shed",
-            "sittingroom","snug","spa","studio","suite","swimmingpool","terrace","toilet","utilityroom",
+            "parkinglot","parlour","patio","receiptionroom","restroom","roof","roofterrace","sauna","scullery",
+            "shed","sittingroom","snug","spa","studio","suite","swimmingpool","terrace","toilet","utilityroom",
             "vegetableplot","ward","yard"]
         }
     }
