@@ -25,7 +25,8 @@
         "description": "Links list representation of /oic/res; list of discoverable Resources\n",
         "parameters": [
           {
-            "$ref": "#/parameters/interface-all"
+            "$ref": "#/parameters/interface-all",
+            "$ref": "#/parameters/SecurityDomain"
           }
         ],
         "responses": {
@@ -106,7 +107,8 @@
         "description": "Baseline representation of /oic/res; list of discoverable Resources\n",
         "parameters": [
           {
-            "$ref": "#/parameters/interface-all"
+            "$ref": "#/parameters/interface-all",
+            "$ref": "#/parameters/SecurityDomain"
           }
         ],
         "responses": {
@@ -154,7 +156,14 @@
       "name": "if",
       "type": "string",
       "enum": ["oic.if.ll", "oic.if.b", "oic.if.baseline"]
-    }
+    },
+    "SecurityDomain": {
+	    "description": "Filter devices by Security Domain",
+	    "in": "query",
+	    "name": "sduuid",
+	    "type": "string",
+	    "format": "uuid"
+	  }
   },
   "definitions": {
     "oic.oic-link": {
