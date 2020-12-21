@@ -23,6 +23,12 @@
           "type": "string",
           "pattern": "^[A-Za-z]{1,8}(-[A-Za-z0-9]{1,8})*$"
         },
+        "uint8": {
+          "description": "A integer that can be represented as a Byte. an array of uint8 can be represented in CBOR as  Major type 2",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
         "int64": {
           "description": "A string instance is valid against this attribute if it contains an integer in the range [-(2**63), (2**63)-1]",
           "type": "string",
