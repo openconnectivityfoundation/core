@@ -2,11 +2,11 @@
   "swagger": "2.0",
   "info": {
     "title": "Platform",
-    "version": "2019-03-04",
+    "version": "2021-02-02",
     "license": {
       "name": "OCF Data Model License",
       "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
-      "x-copyright": "Copyright 2016-2019 Open Connectivity Foundation, Inc. All rights reserved."
+      "x-copyright": "Copyright 2016-2019, 2021 Open Connectivity Foundation, Inc. All rights reserved."
     },
     "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
   },
@@ -83,7 +83,7 @@
         },
         "mnmo" : {
           "description": "Model number as designated by the manufacturer",
-          "maxLength": 64,
+          "maxLength": 128,
           "readOnly": true,
           "type": "string"
         },
@@ -159,7 +159,7 @@
           "type": "array"
         },
         "mnnct" : {
-           "description": "An array of integers and each integer indicates the network connectivity type based on IANAIfType value as defined by: https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib, e.g., [71, 259] which represents Wi-Fi and Zigbee.",
+           "description": "An array of integers and each integer indicates the network connectivity type based on IANAIfType value as defined by: https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib, e.g., [71, 259] which represents Wi-Fi and ZigBee.",
            "items": {
              "type": "integer",
              "minimum": 1,
