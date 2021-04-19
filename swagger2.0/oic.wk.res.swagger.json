@@ -182,7 +182,8 @@
               "oic.if.rw",
               "oic.if.r",
               "oic.if.a",
-              "oic.if.s"
+              "oic.if.s",
+              "oic.if.w"
             ],
             "type": "string",
             "maxLength": 64
