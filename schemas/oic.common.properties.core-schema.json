@@ -53,6 +53,20 @@
            "description": "Descriptive location of the Resource"
          }
        ]
-     }
+     },
+     "if": {
+       "description": "The OCF Interfaces that may be supported by any instance of a Resource.",
+       "items": {
+         "enum": [
+           "oic.if.startup",
+           "oic.if.startup.revert"
+         ],
+         "type": "string"
+       },
+       "minItems": 1,
+       "readOnly": true,
+       "uniqueItems": true,
+       "type": "array"
+    }
   }
 }
