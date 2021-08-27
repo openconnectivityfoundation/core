@@ -183,6 +183,7 @@
               "oic.if.r",
               "oic.if.a",
               "oic.if.s",
+              "oic.if.w",
               "oic.if.startup",
               "oic.if.startup.revert"
             ],
