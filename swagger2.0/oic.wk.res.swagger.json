@@ -82,7 +82,7 @@
               {
                 "href": "/humidity",
                 "rep":{
-                  "rt":           ["oic.r.humidity"],
+                  "rt": ["oic.r.humidity"],
                   "humidity": 40,
                   "desiredHumidity": 40
                 }
@@ -90,7 +90,7 @@
               {
                 "href": "/temperature",
                 "rep":{
-                  "rt":           ["oic.r.temperature"],
+                  "rt": ["oic.r.temperature"],
                   "temperature": 20.0,
                   "units": "C"
                 }
@@ -183,7 +183,9 @@
               "oic.if.r",
               "oic.if.a",
               "oic.if.s",
-              "oic.if.w"
+              "oic.if.w",
+              "oic.if.startup",
+              "oic.if.startup.revert"
             ],
             "type": "string",
             "maxLength": 64
