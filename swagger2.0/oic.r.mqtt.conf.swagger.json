@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MQTT configuration",
+    "version": "2021-02-10",
+    "license": {
+      "name": "OCF Data Model License",
+      "url": "https://github.com/openconnectivityfoundation/core/blob/e28a9e0a92e17042ba3e83661e4c0fbce8bdc4ba/LICENSE.md",
+      "x-copyright": "Copyright 2021 Open Connectivity Foundation, Inc. All rights reserved."
+    },
+    "termsOfService": "https://openconnectivityfoundation.github.io/core/DISCLAIMER.md"
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/mqttconfResURI" : {
+      "get": {
+        "description": "The Resource through the MQTT server information can be set.\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"}
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example": {
+                "rt":   ["oic.r.mqtt.conf"],
+                "server":   "",
+                "port":   8,
+                "kai" : 60,
+                "uid" : "",
+                "pwd" : "",
+                "cacert" : "",
+                "clcert" : "",
+                "log" : "not connected",
+                "crcode" : -1
+              },
+              "schema": { "$ref": "#/definitions/mqttconf" }
+            }
+        }
+      },
+      "post": {
+        "description": "Set information to connect to an MQTT server\n",
+        "parameters": [
+          {"$ref": "#/parameters/interface-all"},
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/mqttconf" },
+            "x-example": {
+              "server": "test.mosquitto.org",
+              "port":   1883 ,
+              "kai" :  60
+            }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description" : "",
+              "x-example": {
+                "rt":   ["oic.r.mqtt.conf"],
+                "server":   "test.mosquitto.org",
+                "port":   8,
+                "kai" : 60,
+                "uid" : "",
+                "pwd" : "",
+                "cacert" : "",
+                "clcert" : "",
+                "log" : "connected",
+                "crcode" : 0
+              },
+              "schema": { "$ref": "#/definitions/mqttconf" }
+            }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "interface-all" : {
+      "in" : "query",
+      "name" : "if",
+      "type" : "string",
+      "enum" : ["oic.if.rw", "oic.if.baseline"]
+    }
+  },
+  "definitions": {
+    "mqttconf" : {
+      "properties": {
+        "server" : {
+          "description": "The connection information of the MQTT server. Can be an URI or IP address",
+          "type": "string"
+        },
+        "port" : {
+          "description": "The port to connect too",
+          "type": "integer"
+        },
+        "kai" : {
+          "description": "The keep alive interval, in seconds",
+          "type": "integer"
+        },
+        "uid" : {
+          "description": "The user id to be supplied when connecting to the MQTT server",
+          "type": "string"
+        },
+        "pwd" : {
+          "description": "The password to be supplied when connecting to the MQTT server",
+          "type": "string"
+        },
+        "cacert" : {
+          "description": "The certificate authority certificate to be supplied when connecting to the MQTT server",
+          "type": "string"
+        },
+        "clcert" : {
+          "description": "The client certificate to be supplied when connecting to the MQTT server",
+          "type": "string"
+        },
+        "log" : {
+          "description": "Logging information, giving status information back, formatting not defined",
+          "type": "string"
+        },
+        "crcode" : {
+          "description": "MQTT connection reason codes, see MQTT v5 table 3-1 for values. note that -1 indicates 'not yet connected' ",
+          "type": "integer"
+        },
+        "rt" : {
+          "description": "Resource Type of the Resource",
+          "items": {
+            "enum": ["oic.r.mqtt.conf"],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "readOnly": true,
+          "type": "array"
+        },
+        "id" : {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/id"
+        },
+        "n" : {
+          "$ref": "https://openconnectivityfoundation.github.io/core/schemas/oic.common.properties.core-schema.json#/definitions/n"
+        },
+        "if" : {
+          "description": "The OCF Interfaces supported by this Resource",
+          "items": {
+            "enum": [
+              "oic.if.rw",
+              "oic.if.baseline"
+            ],
+            "type": "string",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "readOnly": true,
+          "uniqueItems": true,
+          "type": "array"
+        }
+      },
+      "type" : "object",
+      "required": ["server", "port"]
+    }
+  }
+}
