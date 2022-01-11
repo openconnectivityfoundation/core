@@ -16,7 +16,7 @@
   "paths": {
     "/mqttconfResURI" : {
       "get": {
-        "description": "The Resource through the MQTT server information can be set.\n",
+        "description": "The Resource through which the MQTT server information can be set.",
         "parameters": [
           {"$ref": "#/parameters/interface-all"}
         ],
@@ -88,7 +88,7 @@
     "mqttconf" : {
       "properties": {
         "server" : {
-          "description": "The connection information of the MQTT server. Can be an URI or IP address",
+          "description": "The connection information of the MQTT server. Can be a URI or IP address",
           "type": "string"
         },
         "port" : {
