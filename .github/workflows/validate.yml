@@ -1,0 +1,63 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI-validate
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+
+#outputs:
+#  random-number:
+#    description: "Random number"
+#    value: ${{ steps.random-number-generator.outputs.random-id }}
+#runs:
+#  using: "composite"
+#  steps:
+#    - id: random-number-generator
+#      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+#      shell: bash
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Get Repo
+      id: getrepo
+      uses: actions/checkout@v2
+    - name: Get OpenAPI files
+      id: getfiles
+      run:  |
+        # Using github env (newline separated file list)
+        # find . -type f \( -iname ".*" ! -iname ".htaccess" \)
+        # Refrige  Refrigera
+        echo 'FILE_LIST<<EOF' >> $GITHUB_ENV
+        find . -type f -iname "*.swagger.json" ! -name '*esimeasysetup*' ! -name '*wk.mnt*' ! -name '*wk.con.*' ! -name '*devconf.*' ! -name '*easysetup*' ! -name '*alertcollection*'  >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+        ## files not checked:
+        find . -type f -name '*esimeasysetup*'
+        find . -type f -name '*wk.mnt*'
+        find . -type f -name '*wk.con.*'
+        find . -type f -name '*devconf.*'
+        find . -type f -name '*easysetup*'
+        find . -type f -name '*alertcollection*'
+        # Using step output (space separated file list)
+        FILES="$(find . -type f -iname "*.json")"
+        echo "::set-output name=file_list::$FILES"
+
+    - name: swagger-validator
+      #uses: mbowman100/swagger-validator-action@master
+      uses: mbowman100/swagger-validator-action@2.0
+      #'if: env.FILE_COUNT != '0' # Comment out if you want it to fail if no files found
+      with:
+        files: ${{ env.FILE_LIST }}
+        #files: ${{ steps.getfiles.outputs.file_list }} # For if you're using output
