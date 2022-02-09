@@ -41,15 +41,12 @@ jobs:
         # find . -type f \( -iname ".*" ! -iname ".htaccess" \)
         # Refrige  Refrigera
         echo 'FILE_LIST<<EOF' >> $GITHUB_ENV
-        find . -type f -iname "*.swagger.json" ! -name '*esimeasysetup*' ! -name '*wk.mnt*' ! -name '*wk.con.*' ! -name '*devconf.*' ! -name '*easysetup*' ! -name '*alertcollection*'  >> $GITHUB_ENV
+        find . -type f -iname "*.swagger.json" ! -name '*wk.col*' ! -name '*wk.res*' ! -name '*atomicmeasurement*'  >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
         ## files not checked:
-        find . -type f -name '*esimeasysetup*'
-        find . -type f -name '*wk.mnt*'
-        find . -type f -name '*wk.con.*'
-        find . -type f -name '*devconf.*'
-        find . -type f -name '*easysetup*'
-        find . -type f -name '*alertcollection*'
+        find . -type f -name '*wk.col*'
+        find . -type f -name '*wk.res*'
+        find . -type f -name '*atomicmeasurement*'
         # Using step output (space separated file list)
         FILES="$(find . -type f -iname "*.json")"
         echo "::set-output name=file_list::$FILES"
